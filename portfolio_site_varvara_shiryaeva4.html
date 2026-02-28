@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varvara Shiryaeva — Designer</title>
+    <meta name="description" content="Varvara Shiryaeva — graphic designer specializing in UI/UX, web design, branding, advertising and AI tools." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-orange: #FF4D00;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-orange);
+        }
+        .font-serif-bold {
+            font-family: 'Archivo Black', sans-serif;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+        .font-mono-custom {
+            font-family: 'Space Mono', monospace;
+            letter-spacing: -0.02em;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 30s linear infinite;
+        }
+        .animate-marquee-reverse {
+            display: flex;
+            width: 200%;
+            animation: marquee 35s linear infinite reverse;
+        }
+        .animate-spin-slow {
+            animation: spin 12s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .service-card:hover .arrow-reveal {
+            opacity: 1;
+            transform: rotate(45deg) translateX(10px);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        .skew-marquee {
+            transform: skewY(-2deg);
+        }
+        selection {
+            background: black;
+            color: var(--brand-orange);
+        }
+        ::-moz-selection {
+            background: black;
+            color: var(--brand-orange);
+        }
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 999px;
+            padding: 2px;
+        }
+        .lang-switch button {
+            background: transparent;
+            border: none;
+            color: black;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .lang-switch button:hover,
+        .lang-switch button.active {
+            background: black;
+            color: var(--brand-orange);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-[#FF4D00] text-black overflow-x-hidden">
+        
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 px-4 md:px-12 py-6 flex items-center justify-between pointer-events-none">
+            <div class="pointer-events-auto">
+                <a href="#" class="font-serif-bold text-xl md:text-2xl uppercase tracking-tighter">Varvara Shiryaeva®</a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-1 bg-black rounded-full p-1 border border-white/10 pointer-events-auto shadow-2xl">
+                <a href="#skills" class="px-6 py-2 rounded-full text-white text-xs font-mono-custom uppercase hover:bg-white hover:text-black transition-all duration-300">Skills</a>
+                <a href="#projects" class="px-6 py-2 rounded-full text-white text-xs font-mono-custom uppercase hover:bg-white hover:text-black transition-all duration-300">Projects</a>
+                <a href="#contact" class="px-6 py-2 rounded-full text-white text-xs font-mono-custom uppercase hover:bg-white hover:text-black transition-all duration-300">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-3 pointer-events-auto">
+                <div class="lang-switch">
+                    <button class="active">EN</button>
+                    <button>ES</button>
+                    <button>RU</button>
+                </div>
+                <a href="./cv.pdf" download class="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-black hover:text-[#FF4D00] transition-colors">
+                    <iconify-icon icon="lucide:download" class="text-xl"></iconify-icon>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="relative min-h-screen flex flex-col justify-center pt-24 pb-12 px-4">
+            <div class="container mx-auto">
+                <div class="flex flex-col items-center justify-center text-center">
+                    <h1 class="font-serif-bold text-[16vw] leading-[0.85] uppercase tracking-tighter mb-12">
+                        Varvara<br/>Shiryaeva
+                    </h1>
+                    <h2 class="font-serif-bold text-[4vw] md:text-[3vw] leading-none uppercase tracking-tighter mb-8 text-black/80">
+                        Graphic Designer
+                    </h2>
+                </div>
+                
+                <div class="mt-12 border-t-2 border-black pt-6 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div class="flex items-center gap-3 font-mono-custom text-sm font-bold uppercase tracking-wider">
+                        <iconify-icon icon="lucide:globe" class="text-xl"></iconify-icon>
+                        <span>Spain • Poland • Russia • Belarus</span>
+                    </div>
+
+                    <!-- Rotating Scroll Indicator -->
+                    <div class="relative w-28 h-28 md:w-36 md:h-36 flex items-center justify-center">
+                        <div class="absolute inset-0 animate-spin-slow">
+                            <svg viewBox="0 0 100 100" class="w-full h-full fill-black">
+                                <path id="textPath" d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" fill="none" />
+                                <text class="text-[9px] font-mono-custom font-bold tracking-[0.2em] uppercase">
+                                    <textPath href="#textPath">Scroll Down • Scroll Down • Scroll Down • </textPath>
+                                </text>
+                            </svg>
+                        </div>
+                        <iconify-icon icon="lucide:arrow-down" class="text-3xl md:text-4xl"></iconify-icon>
+                    </div>
+
+                    <div class="text-right font-mono-custom text-sm font-bold uppercase tracking-wider leading-relaxed">
+                        International Media Projects<br/>Since 2020
+                    </div>
+                </div>
+
+                <div class="mt-16 max-w-3xl mx-auto text-center">
+                    <p class="font-mono-custom text-base md:text-lg font-bold uppercase tracking-wider leading-relaxed mb-4">
+                        Proficient in composition, color theory, and modern generative AI tools
+                    </p>
+                    <p class="font-mono-custom text-sm md:text-base font-bold uppercase tracking-wider text-black/70">
+                        Midjourney • ChatGPT • Sora
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Marquee Section -->
+        <section class="bg-black py-12 md:py-20 -mx-4 skew-marquee origin-left overflow-hidden">
+            <div class="animate-marquee whitespace-nowrap flex gap-12 text-[#FF4D00]">
+                <span class="font-serif-bold text-[10vw] uppercase">Graphic Design • UI/UX • Web Design • AI Tools • Graphic Design • UI/UX • Web Design • AI Tools •</span>
+                <span class="font-serif-bold text-[10vw] uppercase">Graphic Design • UI/UX • Web Design • AI Tools • Graphic Design • UI/UX • Web Design • AI Tools •</span>
+            </div>
+            <div class="animate-marquee-reverse whitespace-nowrap flex gap-12 text-white opacity-80 mt-[-2vw]">
+                <span class="font-serif-bold text-[10vw] uppercase">Branding • Advertising • Print • Digital • Branding • Advertising • Print • Digital •</span>
+                <span class="font-serif-bold text-[10vw] uppercase">Branding • Advertising • Print • Digital • Branding • Advertising • Print • Digital •</span>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="bg-[#FF4D00] py-32 md:py-48 px-4">
+            <div class="container mx-auto">
+                <div class="flex items-end justify-between mb-24">
+                    <h2 class="font-serif-bold text-[10vw] leading-none uppercase">Projects</h2>
+                    <iconify-icon icon="lucide:sparkles" class="text-black text-7xl md:text-[8vw] hidden sm:block animate-pulse"></iconify-icon>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <!-- Project 1 -->
+                    <a href="project-social-media-post.html" class="project-card group block">
+                        <div class="relative overflow-hidden rounded-2xl border-4 border-black bg-white">
+                            <img src="https://imagetolink.woopicx.com/2453/b1fd0dc023f3.png" 
+                                 alt="Social media post" 
+                                 class="w-full aspect-[2561/1870] object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <h3 class="font-serif-bold text-2xl md:text-3xl uppercase text-white">Social Media Post</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 2 -->
+                    <a href="project-restaurant-menu.html" class="project-card group block">
+                        <div class="relative overflow-hidden rounded-2xl border-4 border-black bg-white">
+                            <img src="https://imagetolink.woopicx.com/2453/9149df42cdd1.png" 
+                                 alt="Restaurant menu" 
+                                 class="w-full aspect-[2561/1870] object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <h3 class="font-serif-bold text-2xl md:text-3xl uppercase text-white">Restaurant Menu</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 3 -->
+                    <a href="project-ai-pictures.html" class="project-card group block">
+                        <div class="relative overflow-hidden rounded-2xl border-4 border-black bg-white">
+                            <img src="https://imagetolink.woopicx.com/2453/0be0abe2de85.png" 
+                                 alt="Ai pictures" 
+                                 class="w-full aspect-[2561/1870] object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                                <h3 class="font-serif-bold text-2xl md:text-3xl uppercase text-white">AI Visuals</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="skills" class="bg-black text-white py-32 md:py-48 px-4">
+            <div class="container mx-auto">
+                <div class="flex items-end justify-between mb-24">
+                    <h2 class="font-serif-bold text-[10vw] leading-none uppercase">Skills</h2>
+                    <iconify-icon icon="lucide:star" class="text-[#FF4D00] text-7xl md:text-[8vw] hidden sm:block animate-pulse"></iconify-icon>
+                </div>
+
+                <div class="flex flex-col">
+                    <!-- Service Item 01 -->
+                    <div class="service-card group border-t border-white/20 py-12 md:py-16 hover:bg-white/5 transition-colors cursor-pointer">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
+                            <span class="font-mono-custom text-[#FF4D00] text-xl font-bold">(01)</span>
+                            <div class="flex-grow">
+                                <h3 class="font-serif-bold text-5xl md:text-[7vw] leading-none uppercase group-hover:translate-x-4 transition-transform duration-500">Graphic Design</h3>
+                                <div class="flex gap-3 mt-6 flex-wrap">
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Print</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Digital</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Branding</span>
+                                </div>
+                            </div>
+                            <iconify-icon icon="lucide:arrow-up-right" class="arrow-reveal opacity-0 text-[10vw] text-[#FF4D00] transition-all duration-500 hidden md:block"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Service Item 02 -->
+                    <div class="service-card group border-t border-white/20 py-12 md:py-16 hover:bg-white/5 transition-colors cursor-pointer">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
+                            <span class="font-mono-custom text-[#FF4D00] text-xl font-bold">(02)</span>
+                            <div class="flex-grow">
+                                <h3 class="font-serif-bold text-5xl md:text-[7vw] leading-none uppercase group-hover:translate-x-4 transition-transform duration-500">UI/UX Design</h3>
+                                <div class="flex gap-3 mt-6 flex-wrap">
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Interface</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">User Experience</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Prototyping</span>
+                                </div>
+                            </div>
+                            <iconify-icon icon="lucide:arrow-up-right" class="arrow-reveal opacity-0 text-[10vw] text-[#FF4D00] transition-all duration-500 hidden md:block"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Service Item 03 -->
+                    <div class="service-card group border-t border-white/20 py-12 md:py-16 hover:bg-white/5 transition-colors cursor-pointer">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
+                            <span class="font-mono-custom text-[#FF4D00] text-xl font-bold">(03)</span>
+                            <div class="flex-grow">
+                                <h3 class="font-serif-bold text-5xl md:text-[7vw] leading-none uppercase group-hover:translate-x-4 transition-transform duration-500">Web Design</h3>
+                                <div class="flex gap-3 mt-6 flex-wrap">
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Responsive</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Modern</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Functional</span>
+                                </div>
+                            </div>
+                            <iconify-icon icon="lucide:arrow-up-right" class="arrow-reveal opacity-0 text-[10vw] text-[#FF4D00] transition-all duration-500 hidden md:block"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Service Item 04 -->
+                    <div class="service-card group border-t border-b border-white/20 py-12 md:py-16 hover:bg-white/5 transition-colors cursor-pointer">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
+                            <span class="font-mono-custom text-[#FF4D00] text-xl font-bold">(04)</span>
+                            <div class="flex-grow">
+                                <h3 class="font-serif-bold text-5xl md:text-[7vw] leading-none uppercase group-hover:translate-x-4 transition-transform duration-500">AI Design</h3>
+                                <div class="flex gap-3 mt-6 flex-wrap">
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Midjourney</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">ChatGPT</span>
+                                    <span class="border border-white/40 px-3 py-1 rounded-full font-mono-custom text-[10px] uppercase tracking-wider">Sora</span>
+                                </div>
+                            </div>
+                            <iconify-icon icon="lucide:arrow-up-right" class="arrow-reveal opacity-0 text-[10vw] text-[#FF4D00] transition-all duration-500 hidden md:block"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="bg-[#FF4D00] py-40 px-4 flex flex-col items-center text-center">
+            <div class="container mx-auto">
+                <img src="https://imagetolink.woopicx.com/2453/a3f8fb35fdd4.jpeg" 
+                     alt="Varvara Shiryaeva" 
+                     class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-black mb-12 mx-auto shadow-2xl">
+                
+                <h2 class="font-serif-bold text-[12vw] md:text-[14vw] leading-none uppercase mb-8">
+                    Let's Work Together
+                </h2>
+                
+                <p class="font-mono-custom text-base md:text-lg font-bold uppercase tracking-wider mb-12 max-w-2xl mx-auto">
+                    Contact me to discuss your project. Open to new ideas and collaborations.
+                </p>
+                
+                <a href="mailto:hello@example.com" class="inline-block px-12 py-6 bg-black text-white text-xl md:text-2xl font-mono-custom font-bold uppercase rounded-full hover:scale-110 transition-transform duration-300 shadow-2xl">
+                    Get in Touch
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-[#FF4D00] py-12 px-4 md:px-12 border-t-2 border-black">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                <p class="font-mono-custom text-xs font-bold uppercase">© 2025 Varvara Shiryaeva — Graphic Designer</p>
+                <div class="flex gap-6 md:gap-12 flex-wrap justify-center">
+                    <a href="#" class="font-mono-custom text-xs font-bold uppercase hover:underline decoration-2">Instagram</a>
+                    <a href="#" class="font-mono-custom text-xs font-bold uppercase hover:underline decoration-2">Behance</a>
+                    <a href="#" class="font-mono-custom text-xs font-bold uppercase hover:underline decoration-2">LinkedIn</a>
+                    <a href="#" class="font-mono-custom text-xs font-bold uppercase hover:underline decoration-2">Dribbble</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Subtle reveal animation for scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.service-card, .project-card').forEach(card => {
+                card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+                observer.observe(card);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

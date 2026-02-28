@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Varvara Shiryaeva — Designer</title>
+  <meta name="description" content="Varvara Shiryaeva — graphic designer specializing in UI/UX, web design, branding, advertising and AI tools." />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Varvara Shiryaeva — Designer" />
+  <meta property="og:description" content="Graphic design, UI/UX, web design, branding and AI tools." />
+  <meta property="og:image" content="https://woopicx.com/varya_ava.jpeg" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdfc;
+      --fg: #1f1f1f;
+      --muted: #5a3a3a;
+      --accent: #680014;
+      --accent2: #8a0020;
+      --radius: 20px;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--bg);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 32px;
+      z-index: 10;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .lang-switch { display: flex; gap: 8px; margin-left: 20px; }
+    .lang-switch button { background: none; border: 1px solid var(--accent); color: var(--accent); padding: 10px 18px; border-radius: 14px; cursor: pointer; font-size: 16px; transition: all 0.2s ease; }
+    .lang-switch button:hover, .lang-switch button.active { background: var(--accent); color: #fff; }
+
+    .btn-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-cv:hover { background: var(--accent2); }
+
+    .btn-cv svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 85vh;
+      padding: 80px 20px 80px;
+      background: url('https://imagetolink.woopicx.com/2453/ff98a8545ada.jpeg') center top/cover no-repeat;
+      background-attachment: fixed;
+      color: #2e0f0f;
+      overflow: hidden;
+    }
+
+    .intro { max-width: 800px; text-align: left; margin-left: 10%; margin-top: 100px; }
+
+    .intro h1 { font-size:64px; font-weight:700; margin-bottom:10px; line-height:1.1; color:#4a000f; }
+    .intro h2 { font-size:28px; font-weight:600; margin-top:0; margin-bottom:30px; color:#8a0020; letter-spacing:0.5px; }
+    .intro p { font-size:18px; line-height:1.8; color:#5a3a3a; max-width:650px; margin-bottom:20px; }
+
+    .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; background: var(--bg); }
+
+    .section h2 {
+      text-align: center;
+      color: #8a0020;
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .service { background: #fff; border-radius: var(--radius); padding: 25px; text-align: center; box-shadow: var(--shadow); text-align: center; box-shadow: var(--shadow); }
+    .service p { color: var(--muted); }
+
+    .projects .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .project {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.3s ease;
+      background: none;
+      padding: 0;
+    }
+    .project:hover { transform: translateY(-4px); }
+    .project img {
+      width: 100%;
+      aspect-ratio: 2561 / 1870;
+      object-fit: cover;
+      display: block;
+      filter: none;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-section {
+      position: relative;
+      text-align: center;
+      padding: 200px 20px 300px;
+      background: var(--bg);
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 18px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn-contact:hover { background: var(--accent2); }
+
+    .btn-contact svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .btn-contact svg.right { order: 2; }
+
+    .phone {
+      position: absolute;
+      bottom: 74%;
+      right: 50px;
+      transform: translateY(50%) rotate(30deg);
+      width: 624px;
+      opacity: 0.9;
+    }
+
+    footer { text-align: center; color: var(--muted); padding: 30px 20px; font-family: 'Open Sans', sans-serif; background: var(--bg); position: relative; }
+  .project-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+    }
+    .project:hover img {
+      transform: scale(1.03);
+    }
+    /* removed hover background on title */
+    #services, #projects, #contact {
+      scroll-margin-top: 90px;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+@media (max-width: 768px) {
+  #services .services {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+  #services .service {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease forwards;
+  }
+  #services .service:nth-child(1) { animation-delay: 0.1s; }
+  #services .service:nth-child(2) { animation-delay: 0.25s; }
+  #services .service:nth-child(3) { animation-delay: 0.4s; }
+  #services .service:nth-child(4) { animation-delay: 0.55s; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#services">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <div class="lang-switch">
+        <button class="active">EN</button>
+        <button>ES</button>
+        <button>RU</button>
+      </div>
+    </nav>
+    <a href="./cv.pdf" download class="btn-cv">
+      Download CV
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="intro">
+        <h1 style="font-weight:900; font-family: 'Playfair Display', serif; letter-spacing:1px;">Varvara Shiryaeva</h1>
+        <h2 style="font-family: 'Playfair Display', serif; font-size:32px; color:#8a0020; letter-spacing:0.5px;">Graphic Designer</h2>
+        <p style="color:#000;">Participated in international media projects<br>in Spain, Poland, Russia and Belarus.</p>
+        <p style="color:#000;">Proficient in composition, color theory, and modern generative<br>AI tools including Midjourney, ChatGPT, and Sora.</p>
+      </div>
+    </section>
+
+<section id="projects" class="section projects">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 36px;">Featured Projects</h2>
+      <div class="grid">
+        <a href="project-social-media-post.html" class="project">
+          <img src="https://imagetolink.woopicx.com/2453/b1fd0dc023f3.png" alt="Social media post">
+          <div class="project-title">Social media post</div>
+        </a>
+        <a href="project-restaurant-menu.html" class="project">
+          <img src="https://imagetolink.woopicx.com/2453/9149df42cdd1.png" alt="Restaurant menu">
+          <div class="project-title">Restaurant menu</div>
+        </a>
+        <a href="project-ai-pictures.html" class="project">
+          <img src="https://imagetolink.woopicx.com/2453/0be0abe2de85.png" alt="Ai pictures">
+          <div class="project-title">Ai visuals</div>
+        </a>
+      </div>
+    </section>
+
+<section id="services" style="padding: 120px 0 140px; width: 100%; margin: 0; background: var(--accent);">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; text-align:center; margin-top:-40px; margin-bottom:60px; color:#fff;">What I Do</h2>
+      <div class="services" style="max-width: 1200px; margin: 0 auto; margin-top:20px; padding: 0 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
+        <div class="service" style="padding:20px 10px;"><h3 style="color: var(--accent); font-weight:700;">Graphic Design</h3><p style="color:#000;">Creative solutions for digital and print.</p></div>
+        <div class="service" style="padding:20px 10px;"><h3 style="color: var(--accent); font-weight:700;">UI/UX Design</h3><p style="color:#000;">Creating intuitive and functional interfaces.</p></div>
+        <div class="service" style="padding:20px 10px;"><h3 style="color: var(--accent); font-weight:700;">Web Design</h3><p style="color:#000;">Modern and responsive website design.</p></div>
+        <div class="service" style="padding:20px 10px;"><h3 style="color: var(--accent); font-weight:700;">AI Design</h3><p style="color:#000;">Visuals created with advanced generative AI tools.</p></div>
+      </div>
+    </section>
+
+<section id="contact" class="contact-section">
+      <img src="https://imagetolink.woopicx.com/2453/a3f8fb35fdd4.jpeg" alt="Avatar" style="width:220px;height:220px;border-radius:50%;object-fit:cover;border:6px solid #680014;margin-bottom:40px;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); text-align:center;">Let's Work Together!</h2>
+      <p style="color:#000;">Contact me to discuss your project. Open to new ideas and collaborations.</p>
+      <a href="mailto:hello@example.com" class="btn-contact">
+        Get in Touch
+        <svg class="right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      
+    </section>
+
+    <footer>© 2025 Varvara Shiryaeva — your graphic designer</footer>
+  </main>
+
+<script>
+  (function() {
+    const hero = document.querySelector('.hero');
+    const intro = document.querySelector('.intro');
+    if (!hero || !intro) return;
+
+    window.addEventListener('scroll', function() {
+      const scrolled = window.scrollY || window.pageYOffset;
+      const bgOffset = scrolled * 0.25; // фон двигается медленнее
+      const textOffset = scrolled * 0.12; // текст чуть-чуть смещается
+
+      hero.style.backgroundPosition = `center ${-bgOffset}px`;
+      intro.style.transform = `translateY(${textOffset}px)`;
+    });
+  })();
+</script>
+
+</body>
+</html>
