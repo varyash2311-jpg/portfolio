@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <style>
         :root {
@@ -1168,6 +1169,17 @@
 
         .gallery-variant-a .testimonial-wall-testimonials-ke54efzgd:hover .scroll-row-testimonials-ke54efzgd {
             animation-play-state: paused;
+        }
+
+        .gallery-variant-a .gallery-divider {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--slate-400);
+            text-align: center;
+            padding: 24px 16px;
+            flex-shrink: 0;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
         @keyframes scroll-left-testimonials-ke54efzgd {
@@ -2670,12 +2682,13 @@
             // Build modal content - only variant A
             const variantSelector = ``;
 
-            const imagesHTML = buildGalleryHTML(project.images, 'a');
+            const imagesHTML = buildGalleryHTML(project.images, 'a', project.description);
 
+            const showDescInHeader = !project.description || projectId !== 'ai-visuals';
             contentInner.innerHTML = `
                 <div class="modal-header">
                     <h2>${project.title}</h2>
-                    <p>${project.description}</p>
+                    ${showDescInHeader ? `<p>${project.description}</p>` : ''}
                 </div>
                 ${imagesHTML}
             `;
@@ -2685,7 +2698,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function buildGalleryHTML(images, variant) {
+        function buildGalleryHTML(images, variant, dividerText) {
             const wrapper = document.createElement('div');
             wrapper.className = `modal-images-wrapper gallery-variant-a`;
             
@@ -2747,6 +2760,12 @@
             rowRight.appendChild(contentRight2);
 
             wallDiv.appendChild(rowLeft);
+            if (dividerText) {
+                const divider = document.createElement('div');
+                divider.className = 'gallery-divider';
+                divider.textContent = dividerText;
+                wallDiv.appendChild(divider);
+            }
             wallDiv.appendChild(rowRight);
             wrapper.appendChild(wallDiv);
             
@@ -3409,7 +3428,7 @@
             if (!container) return;
 
             const colorOptions = ['#B9EBC4', '#A8D5C3', '#C2E8D1', '#E3F7DF', '#D9F4E0', '#C8E9D9', '#EAF9EB', '#D0F0E0', '#F0F9EE', '#D4F7EC'];
-            const toolNames = ['Figma', 'Adobe CC', 'Midjourney', 'GPT', 'Sora', 'HTML/CSS', 'Canvas'];
+            const toolNames = ['Figma', 'Adobe CC', 'Midjourney', 'GPT', 'Sora', 'HTML/CSS', 'Canvas', 'Claude', 'Cursor', 'vibe-coding'];
 
             let width = 0, height = 0;
             const SCALE = 80;
@@ -3559,11 +3578,13 @@
                     const r = ball.radius * SCALE;
                     ctx.beginPath();
                     ctx.arc(px, py, r, 0, Math.PI * 2);
+                    ctx.globalAlpha = 0.55;
                     ctx.fillStyle = ball.color;
                     ctx.fill();
-                    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
                     ctx.lineWidth = 1;
                     ctx.stroke();
+                    ctx.globalAlpha = 1;
                     ctx.fillStyle = '#0f172a';
                     ctx.font = 'bold ' + Math.max(10, Math.min(14, r * 0.35)) + 'px Inter, sans-serif';
                     ctx.textAlign = 'center';
