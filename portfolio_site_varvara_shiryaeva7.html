@@ -360,11 +360,31 @@
         /* Tools & Frameworks Section */
         .tools-frameworks-section {
             background: var(--primary-dark);
-            padding: 120px 0 120px 0;
+            padding: 64px 0 64px 0;
+            height: 800px;
+            min-height: 800px;
+            width: 100%;
+            margin-top: 120px;
+            margin-bottom: 120px;
+            box-sizing: border-box;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+
+        .features-container--content-only {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 25% 75%;
+            gap: 80px;
+            padding: 0 64px 0 48px;
+            align-items: start;
+        }
+
+        .features-container--content-only .features-content {
+            grid-column: 2;
         }
 
         .tools-frameworks-section::before {
@@ -380,7 +400,7 @@
         .tools-frameworks-header {
             text-align: center;
             margin-bottom: 0;
-            padding: 0 48px 24px 48px;
+            padding: 32px 48px 24px 48px;
         }
 
         .tools-frameworks-header h2 {
@@ -395,6 +415,7 @@
 
         .tools-frameworks-header p {
             font-size: 18px;
+            line-height: 1.5;
             color: var(--slate-400);
             max-width: 600px;
             margin: 0 auto;
@@ -407,7 +428,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            min-height: 380px;
+            min-height: 260px;
         }
 
         /* Planck / Matter scene — без видимой границы, границы = края страницы и низ секции */
@@ -415,14 +436,14 @@
             position: relative;
             width: 100%;
             flex: 1;
-            min-height: 320px;
+            min-height: 220px;
             overflow: hidden;
         }
         .planck-scene-container {
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 320px;
+            min-height: 220px;
             overflow: hidden;
         }
         .planck-scene-canvas {
@@ -432,11 +453,22 @@
             touch-action: none;
         }
         @media (max-width: 768px) {
+            .tools-frameworks-section {
+                padding: 48px 0;
+                height: 800px;
+                min-height: 800px;
+            }
+            .tools-frameworks-header {
+                padding: 24px 24px 24px 24px;
+            }
+            .features-container--content-only {
+                padding: 0 24px;
+            }
             .planck-scene-wrap {
-                min-height: 280px;
+                min-height: 200px;
             }
             .planck-scene-container {
-                min-height: 280px;
+                min-height: 200px;
             }
         }
 
@@ -597,14 +629,20 @@
             grid-template-columns: 25% 75%;
             gap: 80px;
             padding: 0 64px 0 48px;
+            align-items: start;
         }
 
         .features-nav {
             position: sticky;
             top: 100px;
             height: fit-content;
+            transform: translateY(0);
+            filter: blur(0);
+            opacity: 1;
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                        filter 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
 
         .features-nav-item {
             display: flex;
@@ -635,6 +673,19 @@
 
         .features-nav-item.active::before {
             background: var(--slate-900);
+        }
+
+        .features-nav.nav-hidden {
+            opacity: 0;
+            transform: translateY(-16px);
+            filter: blur(8px);
+            pointer-events: none;
+        }
+
+        .features-nav--secondary {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
         }
 
         .features-content {
@@ -873,7 +924,7 @@
         /* FAQ Section */
         .faq-section {
             background: var(--surface-white);
-            padding: 120px 64px 120px 48px;
+            padding: 0 64px 120px 48px;
         }
 
         .faq-container {
@@ -942,7 +993,7 @@
         /* Contact Section */
         .contact-section {
             background: var(--primary-dark);
-            padding: 120px 64px 120px 48px;
+            padding: 60px 64px 60px 48px;
             text-align: center;
         }
 
@@ -1124,6 +1175,165 @@
             position: relative;
         }
 
+
+        /* AI Visuals case-study layout */
+        .ai-case {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .ai-case-overview {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 16px;
+            background: linear-gradient(140deg, #ffffff, #f8fafc);
+        }
+
+        .ai-case-description {
+            color: var(--slate-900);
+            font-size: 16px;
+            line-height: 1.7;
+            text-wrap: pretty;
+        }
+
+        .ai-case-meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            align-content: start;
+        }
+
+        .ai-case-meta-item {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 12px;
+            padding: 10px 12px;
+            background: #fff;
+        }
+
+        .ai-case-meta-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--slate-400);
+            margin-bottom: 4px;
+        }
+
+        .ai-case-meta-item .value {
+            font-size: 14px;
+            color: var(--slate-900);
+            font-weight: 600;
+        }
+
+        .ai-case-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ai-case-section-title {
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            color: var(--slate-900);
+        }
+
+        .ai-case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .ai-case-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #eef2f7;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            cursor: zoom-in;
+        }
+
+        .ai-case-card img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .ai-case-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .ai-lightbox {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(4px);
+            z-index: 1100;
+            padding: 24px;
+        }
+
+        .ai-lightbox.active {
+            display: flex;
+        }
+
+        .ai-lightbox-content {
+            position: relative;
+            width: min(1200px, 100%);
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.45);
+            background: #0f172a;
+        }
+
+        .ai-lightbox-close {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(15, 23, 42, 0.9);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .ai-case-overview {
+                grid-template-columns: 1fr;
+            }
+            .ai-case-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ai-case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Вариант А: Два ряда с прокруткой */
 
         /* Gallery with two scrolling rows */
@@ -1131,11 +1341,13 @@
             width: 100%;
             background-color: transparent;
             padding: 20px 0;
-            overflow: hidden;
+            overflow-x: auto;
+            overflow-y: hidden;
             font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
             gap: 24px;
+            scroll-behavior: smooth;
         }
 
         .gallery-variant-a .scroll-row-testimonials-ke54efzgd {
@@ -1159,17 +1371,7 @@
             padding-right: 24px;
         }
 
-        .gallery-variant-a .scroll-left-testimonials-ke54efzgd {
-            animation: scroll-left-testimonials-ke54efzgd linear infinite;
-        }
-
-        .gallery-variant-a .scroll-right-testimonials-ke54efzgd {
-            animation: scroll-right-testimonials-ke54efzgd linear infinite;
-        }
-
-        .gallery-variant-a .testimonial-wall-testimonials-ke54efzgd:hover .scroll-row-testimonials-ke54efzgd {
-            animation-play-state: paused;
-        }
+        /* Автопрокрутка отключена, классы scroll-left/right сохранены для совместимости */
 
         .gallery-variant-a .gallery-divider {
             font-size: 15px;
@@ -1416,8 +1618,13 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .features-container {
+            .features-container,
+            .features-container--content-only {
                 grid-template-columns: 1fr;
+            }
+
+            .features-container--content-only .features-content {
+                grid-column: 1;
             }
 
             .features-nav {
@@ -1471,11 +1678,13 @@
             }
 
             .tools-frameworks-section {
-                padding: 80px 0;
+                padding: 48px 0;
+                height: 800px;
+                min-height: 800px;
             }
 
             .tools-frameworks-header {
-                padding: 0 24px 24px 24px;
+                padding: 24px 24px 24px 24px;
             }
 
             .tools-frameworks-container {
@@ -1625,6 +1834,442 @@
                 gap: 16px;
             }
         }
+
+        /* Overrides for AI Visuals gallery: independent rows with arrows */
+        .gallery-variant-a .testimonial-wall-testimonials-ke54efzgd {
+            overflow: hidden;
+        }
+
+        .gallery-variant-a .scroll-row-wrapper-testimonials-ke54efzgd {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gallery-variant-a .scroll-row-testimonials-ke54efzgd {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .gallery-variant-a .scroll-arrow-testimonials-ke54efzgd {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.8);
+            color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .gallery-variant-a .scroll-arrow-testimonials-ke54efzgd:hover {
+            background: rgba(15, 23, 42, 0.95);
+            border-color: rgba(248, 250, 252, 0.9);
+            color: #f9fafb;
+            transform: translateY(-1px);
+        }
+
+        .gallery-variant-a .scroll-arrow-testimonials-ke54efzgd:disabled {
+            opacity: 0.35;
+            cursor: default;
+            transform: none;
+        }
+
+        /* AI Visuals: 3D book viewer */
+        .book-viewer {
+            margin-top: 40px;
+        }
+
+        .book-viewer--menu {
+            margin-top: 8px;
+        }
+
+        .book-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .book-viewer--menu .book-controls {
+            margin-bottom: 8px;
+        }
+
+        .book-arrow {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: rgba(15, 23, 42, 0.82);
+            color: #e5e7eb;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            line-height: 1;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .book-arrow:hover {
+            transform: translateY(-1px);
+            background: rgba(15, 23, 42, 0.95);
+            border-color: rgba(248, 250, 252, 0.9);
+        }
+
+        .book-arrow:disabled {
+            opacity: 0.35;
+            cursor: default;
+            transform: none;
+        }
+
+        .book-page-counter {
+            min-width: 72px;
+            text-align: center;
+            color: var(--slate-400);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .book-stage {
+            perspective: 1400px;
+            display: flex;
+            justify-content: center;
+            max-height: calc(90vh - 260px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 8px;
+        }
+
+        .book-viewer--menu .book-stage {
+            max-height: none;
+            overflow: visible;
+            padding-right: 0;
+            margin-top: 12px;
+        }
+
+        .book {
+            width: auto;
+            height: min(520px, calc(90vh - 280px));
+            max-width: 100%;
+            /* Two A4 portrait pages side-by-side */
+            aspect-ratio: 420 / 297;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .book-viewer--menu .book {
+            height: min(920px, calc(90vh - 150px));
+        }
+
+        .book-contact-sheet {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .book-contact-sheet-item {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .book-contact-sheet-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        @media (max-width: 1024px) {
+            .book-contact-sheet {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .book-contact-sheet {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .book-spread {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(0);
+            opacity: 0;
+            transition: transform 0.28s ease, opacity 0.28s ease;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            position: absolute;
+            will-change: transform, opacity;
+        }
+
+        .book-spread--single {
+            grid-template-columns: 1fr;
+            border-radius: 0;
+            overflow: visible;
+        }
+
+        .book-spread--single .book-page {
+            width: auto;
+            height: 100%;
+            aspect-ratio: 210 / 297;
+            max-width: min(520px, 100%);
+            justify-self: center;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            clip-path: inset(0 round 12px) !important;
+            outline: none;
+        }
+
+        .book-spread--pair::before {
+            content: none;
+        }
+
+        .book-spread.active {
+            display: grid;
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .book-spread--single.active {
+            display: flex;
+            transform: rotateY(0deg) translateY(0) scale(1);
+        }
+
+        .book-spread--pair.active {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Return subtle perspective for open spreads */
+        .book-spread--pair.active .book-page:first-child {
+            transform: perspective(1600px) rotateY(10deg);
+            transform-origin: right center;
+            box-shadow: inset -10px 0 18px rgba(2, 6, 23, 0.12), 0 12px 30px rgba(15, 23, 42, 0.14);
+        }
+
+        .book-spread--pair.active .book-page:last-child {
+            transform: perspective(1600px) rotateY(-10deg);
+            transform-origin: left center;
+            box-shadow: inset 10px 0 18px rgba(2, 6, 23, 0.12), 0 12px 30px rgba(15, 23, 42, 0.14);
+        }
+
+        .book-spread--pair.active .book-page:last-child .book-page-image {
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .book-spread.prev {
+            display: none;
+            opacity: 0;
+        }
+
+        .book-spread.next {
+            display: none;
+            opacity: 0;
+        }
+
+        .book-page {
+            position: relative;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            transition: box-shadow 0.35s ease;
+            transform-style: preserve-3d;
+        }
+
+        .book-page:first-child {
+            border-right: none;
+            box-shadow: none;
+        }
+
+        .book-page:last-child {
+            border-left: none;
+            box-shadow: none;
+        }
+
+        .book-page--single {
+            width: auto;
+            max-width: min(520px, 100%);
+            justify-self: unset;
+            transform: none !important;
+            border-radius: 12px !important;
+            overflow: hidden;
+            clip-path: inset(0 round 12px) !important;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+        }
+
+        .book-spread--single .book-page-image {
+            border-radius: 12px !important;
+            clip-path: inset(0 round 12px) !important;
+            object-fit: cover;
+        }
+
+        /* Cover pages: enforce same rounded corners explicitly */
+        .book-cover {
+            border-radius: 12px !important;
+            overflow: hidden !important;
+            clip-path: inset(0 round 12px) !important;
+            width: auto !important;
+            height: 100% !important;
+            aspect-ratio: 210 / 297 !important;
+            align-self: center;
+        }
+
+        .book-cover .book-page-image {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 12px !important;
+            clip-path: inset(0 round 12px) !important;
+            overflow: hidden;
+            transform: none;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        .book-page-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: 2px dashed rgba(148, 163, 184, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #475569;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(16px, 2.2vw, 24px);
+            letter-spacing: 0.02em;
+        }
+
+        .book-page-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: transparent;
+            display: block;
+            box-shadow: none;
+            border-radius: 8px;
+        }
+
+        .book-page-empty {
+            width: 100%;
+            height: 100%;
+            background: #f8fafc;
+        }
+
+        .book-page-missing {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+
+        .book-spread--pair.turn-next {
+            animation: bookSpreadPairTurnNext 520ms ease-out;
+        }
+
+        .book-spread--pair.turn-prev {
+            animation: bookSpreadPairTurnPrev 520ms ease-out;
+        }
+
+        /* During turn, each page bends in opposite direction */
+        .book-spread--pair.turn-next .book-page:first-child {
+            animation: pageLeftTurnNext 520ms ease-out;
+            transform-origin: right center;
+        }
+
+        .book-spread--pair.turn-next .book-page:last-child {
+            animation: pageRightTurnNext 520ms ease-out;
+            transform-origin: left center;
+        }
+
+        .book-spread--pair.turn-prev .book-page:first-child {
+            animation: pageLeftTurnPrev 520ms ease-out;
+            transform-origin: right center;
+        }
+
+        .book-spread--pair.turn-prev .book-page:last-child {
+            animation: pageRightTurnPrev 520ms ease-out;
+            transform-origin: left center;
+        }
+
+        .book-spread--single.turn-next {
+            animation: bookSpreadSingleTurnNext 420ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .book-spread--single.turn-prev {
+            animation: bookSpreadSingleTurnPrev 420ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes bookSpreadPairTurnNext {
+            0% { transform: translateX(8px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes bookSpreadPairTurnPrev {
+            0% { transform: translateX(-8px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes pageLeftTurnNext {
+            0% { transform: perspective(1600px) rotateY(16deg); }
+            100% { transform: perspective(1600px) rotateY(10deg); }
+        }
+
+        @keyframes pageRightTurnNext {
+            0% { transform: perspective(1600px) rotateY(-16deg); }
+            100% { transform: perspective(1600px) rotateY(-10deg); }
+        }
+
+        @keyframes pageLeftTurnPrev {
+            0% { transform: perspective(1600px) rotateY(-16deg); }
+            100% { transform: perspective(1600px) rotateY(10deg); }
+        }
+
+        @keyframes pageRightTurnPrev {
+            0% { transform: perspective(1600px) rotateY(16deg); }
+            100% { transform: perspective(1600px) rotateY(-10deg); }
+        }
+
+        @keyframes bookSpreadSingleTurnNext {
+            0% { transform: perspective(1200px) rotateY(-10deg) translateX(1%); }
+            100% { transform: perspective(1200px) rotateY(0deg) translateX(0); }
+        }
+
+        @keyframes bookSpreadSingleTurnPrev {
+            0% { transform: perspective(1200px) rotateY(10deg) translateX(-1%); }
+            100% { transform: perspective(1200px) rotateY(0deg) translateX(0); }
+        }
     </style>
 </head>
 <body>
@@ -1704,6 +2349,39 @@
                         <img src="https://imagetolink.woopicx.com/2453/a3f8fb35fdd4.jpeg" alt="Varvara Shiryaeva" class="overview-avatar">
                     </div>
                 </div>
+            </div>
+        </div>
+        <section id="technical-skills-section" class="tools-frameworks-section">
+            <div class="tools-frameworks-header">
+                <h2 data-i18n="technical.title">Technical skills</h2>
+                <p data-i18n="technical.description">Technologies and tools I work with to bring creative ideas to life</p>
+            </div>
+            <div class="tools-frameworks-container">
+                <div class="planck-scene-wrap">
+                    <div class="planck-scene-container">
+                        <canvas id="planck-skills-canvas" class="planck-scene-canvas"></canvas>
+                    </div>
+                </div>
+                <div class="tools-grid" style="display: none;">
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Figma</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Adobe Creative Cloud</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Midjourney</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">GPT</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Sora</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">HTML / CSS</div></div>
+                    <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Canvas experiments</div></div>
+                </div>
+            </div>
+        </section>
+        <div class="features-container features-container--content-only">
+            <div class="features-nav features-nav--secondary" aria-hidden="false">
+                <div class="features-nav-item" data-target="skills-overview">Overview</div>
+                <div class="features-nav-item" data-target="graphic-design">Graphic design</div>
+                <div class="features-nav-item" data-target="ui-ux">UI/UX design</div>
+                <div class="features-nav-item" data-target="web-design">Web design</div>
+                <div class="features-nav-item" data-target="ai-design">AI design</div>
+            </div>
+            <div class="features-content">
                 <div id="graphic-design" class="feature-card">
                     <div class="feature-header">
                         <div class="feature-icon">
@@ -1774,13 +2452,13 @@
                         <p>Creative social media design</p>
                     </div>
                 </a>
-                <a href="project-restaurant-menu.html" class="project-card">
+                <div class="project-card" onclick="openProjectModal('restaurant-menu')" style="cursor: pointer;">
                     <img src="https://imagetolink.woopicx.com/2453/9149df42cdd1.png" alt="Restaurant menu">
                     <div class="project-info">
                         <h4>Restaurant menu</h4>
                         <p>Elegant menu design</p>
                     </div>
-                </a>
+                </div>
                 <div class="project-card" onclick="openProjectModal('ai-visuals')" style="cursor: pointer;">
                     <img src="https://imagetolink.woopicx.com/2453/0be0abe2de85.png" alt="Ai pictures">
                     <div class="project-info">
@@ -1788,30 +2466,6 @@
                         <p>Generative AI artwork</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tools & Frameworks Section -->
-    <section class="tools-frameworks-section">
-        <div class="tools-frameworks-header">
-            <h2 data-i18n="technical.title">Technical skills</h2>
-            <p data-i18n="technical.description">Technologies and tools I work with to bring creative ideas to life</p>
-        </div>
-        <div class="tools-frameworks-container">
-            <div class="planck-scene-wrap">
-                <div class="planck-scene-container">
-                    <canvas id="planck-skills-canvas" class="planck-scene-canvas"></canvas>
-                </div>
-            </div>
-            <div class="tools-grid" style="display: none;">
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Figma</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Adobe Creative Cloud</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Midjourney</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">GPT</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Sora</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">HTML / CSS</div></div>
-                <div class="tool-item"><div class="tool-item-badge"></div><div class="tool-item-name">Canvas experiments</div></div>
             </div>
         </div>
     </section>
@@ -1828,7 +2482,7 @@
                     <iconify-icon icon="lucide:chevron-down" class="faq-chevron" style="font-size: 20px;"></iconify-icon>
                 </div>
                 <div class="faq-answer">
-                    <p>I design thoughtful visual systems — from brand identity&nbsp;and editorial design to UI/UX&nbsp;and interactive web experiences. I also integrate AI tools into my workflow to accelerate ideation&nbsp;and prototyping.</p>
+                    <p>Hi! Here's a quick overview of some that I offer:<br><br>• Website development and design<br>• Content generation using Ai<br>• Design of advertising materials and social media posts<br>• Branding and corporate Identity<br>• Prototyping and app interface design<br>• Print design<br><br>If you have a specific project or need something tailored to your unique vision, feel free to reach out and we can discuss how I can help!</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -1837,16 +2491,7 @@
                     <iconify-icon icon="lucide:chevron-down" class="faq-chevron" style="font-size: 20px;"></iconify-icon>
                 </div>
                 <div class="faq-answer">
-                    <p>My process usually includes research, concept development, visual exploration, refinement,&nbsp;and final delivery. I share drafts along the way to ensure alignment&nbsp;and clarity.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How long does a project take?</span>
-                    <iconify-icon icon="lucide:chevron-down" class="faq-chevron" style="font-size: 20px;"></iconify-icon>
-                </div>
-                <div class="faq-answer">
-                    <p>Small projects (posters, layouts) — 3–7 days<br>Brand or UI projects — 2–4 weeks depending on scope</p>
+                    <p>My process usually includes research, concept development, visual exploration, refinement,&nbsp;and final delivery. I share drafts along the way to ensure alignment&nbsp;and clarity. I also always welcome clear edits.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -1924,7 +2569,7 @@
 
     <!-- Footer -->
     <footer>
-        © 2025 Varvara Shiryaeva — Graphic designer
+        © 2026 Varvara Shiryaeva — Graphic designer
     </footer>
 
     <!-- Project Modal Popup -->
@@ -2046,6 +2691,24 @@
         }, observerOptions);
 
         sections.forEach(section => observer.observe(section));
+
+        const featuresNavs = document.querySelectorAll('.features-nav');
+        const technicalSection = document.getElementById('technical-skills-section');
+        if (featuresNavs.length && technicalSection) {
+            const techObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const r = entry.intersectionRatio;
+                    featuresNavs.forEach(navEl => {
+                        if (r >= 0.55) {
+                            navEl.classList.add('nav-hidden');
+                        } else if (r <= 0.6) {
+                            navEl.classList.remove('nav-hidden');
+                        }
+                    });
+                });
+            }, { root: null, rootMargin: '0px', threshold: [0, 0.15, 0.3, 0.4, 0.5, 0.55, 0.6, 0.7, 0.85, 1] });
+            techObserver.observe(technicalSection);
+        }
 
         // Fallback scroll handler
         let scrollTimeout;
@@ -2321,26 +2984,24 @@
                 faq: {
                     title: 'Frequently asked questions',
                     q1: 'What services do you offer?',
-                    a1: 'I design thoughtful visual systems — from brand identity\u00A0and editorial design to UI/UX\u00A0and interactive web experiences. I also integrate AI tools into my workflow to accelerate ideation\u00A0and prototyping.',
+                    a1: 'Hi! Here\'s a quick overview of some that I offer:\n\n• Website development and design\n• Content generation using Ai\n• Design of advertising materials and social media posts\n• Branding and corporate Identity\n• Prototyping and app interface design\n• Print design\n\nIf you have a specific project or need something tailored to your unique vision, feel free to reach out and we can discuss how I can help!',
                     q2: 'What is your design process?',
-                    a2: 'My process usually includes research, concept development, visual exploration, refinement,\u00A0and final delivery. I share drafts along the way to ensure alignment\u00A0and clarity.',
-                    q3: 'How long does a project take?',
-                    a3: 'Small projects (posters, layouts) — 3–7 days\nBrand or UI projects — 2–4 weeks depending on scope',
-                    q4: 'What are your rates?',
-                    a4: 'I work on project-based pricing rather than hourly rates. Pricing depends on scope\u00A0and complexity. I\'m happy to provide a custom quote after a short brief.',
-                    q5: 'Do you work with international clients?',
-                    a5: 'Yes, I work remotely with clients worldwide.',
-                    q6: 'What tools do you use?',
-                    a6: 'Figma, Adobe Illustrator, InDesign, Photoshop,\u00A0and AI-assisted tools for rapid prototyping\u00A0and visual experimentation.',
-                    q7: 'How can I start working with you?',
-                    a7: 'Send me a message with a short project description, timeline,\u00A0and budget range — I\'ll get back to you within 24 hours.'
+                    a2: 'My process usually includes research, concept development, visual exploration, refinement,\u00A0and final delivery. I share drafts along the way to ensure alignment\u00A0and clarity. I also always welcome clear edits.',
+                    q3: 'What are your rates?',
+                    a3: 'I work on project-based pricing rather than hourly rates. Pricing depends on scope\u00A0and complexity. I\'m happy to provide a custom quote after a short brief.',
+                    q4: 'Do you work with international clients?',
+                    a4: 'Yes, I work remotely with clients worldwide.',
+                    q5: 'What tools do you use?',
+                    a5: 'Figma, Adobe Illustrator, InDesign, Photoshop,\u00A0and AI-assisted tools for rapid prototyping\u00A0and visual experimentation.',
+                    q6: 'How can I start working with you?',
+                    a6: 'Send me a message with a short project description, timeline,\u00A0and budget range — I\'ll get back to you within 24 hours.'
                 },
                 contact: {
                     title: "Let's work together",
                     description: 'Contact me\u00A0to discuss your project. I\'m open\u00A0to new ideas\u00A0and collaborations.',
                     getInTouch: 'Get in Touch'
                 },
-                footer: '© 2025 Varvara Shiryaeva — Graphic designer'
+                footer: '© 2026 Varvara Shiryaeva — Graphic designer'
             },
             es: {
                 nav: {
@@ -2396,26 +3057,24 @@
                 faq: {
                     title: 'Preguntas frecuentes',
                     q1: '¿Qué servicios ofreces?',
-                    a1: 'Diseño sistemas visuales cuidadosos — desde identidad de marca\u00A0y diseño editorial hasta UI/UX\u00A0y experiencias web interactivas. También integro herramientas de IA en mi flujo de trabajo para acelerar la ideación\u00A0y el prototipado.',
+                    a1: 'Hi! Here\'s a quick overview of some that I offer:\n\n• Website development and design\n• Content generation using Ai\n• Design of advertising materials and social media posts\n• Branding and corporate Identity\n• Prototyping and app interface design\n• Print design\n\nIf you have a specific project or need something tailored to your unique vision, feel free to reach out and we can discuss how I can help!',
                     q2: '¿Cuál es tu proceso de diseño?',
-                    a2: 'Mi proceso generalmente incluye investigación, desarrollo de conceptos, exploración visual, refinamiento\u00A0y entrega final. Comparto borradores durante el proceso para asegurar alineación\u00A0y claridad.',
-                    q3: '¿Cuánto tiempo toma un proyecto?',
-                    a3: 'Proyectos pequeños (posters, layouts) — 3–7 días\nProyectos de marca o UI — 2–4 semanas dependiendo del alcance',
-                    q4: '¿Cuáles son tus tarifas?',
-                    a4: 'Trabajo con precios basados en proyectos en lugar de tarifas por hora. El precio depende del alcance\u00A0y la complejidad. Estoy feliz de proporcionar una cotización personalizada después de un breve resumen.',
-                    q5: '¿Trabajas con clientes internacionales?',
-                    a5: 'Sí, trabajo remotamente con clientes de todo el mundo.',
-                    q6: '¿Qué herramientas usas?',
-                    a6: 'Figma, Adobe Illustrator, InDesign, Photoshop\u00A0y herramientas asistidas por IA para prototipado rápido\u00A0y experimentación visual.',
-                    q7: '¿Cómo puedo empezar a trabajar contigo?',
-                    a7: 'Envíame un mensaje con una breve descripción del proyecto, cronograma\u00A0y rango de presupuesto — te responderé en 24 horas.'
+                    a2: 'Mi proceso generalmente incluye investigación, desarrollo de conceptos, exploración visual, refinamiento\u00A0y entrega final. Comparto borradores durante el proceso para asegurar alineación\u00A0y claridad. También agradezco siempre las correcciones claras.',
+                    q3: '¿Cuáles son tus tarifas?',
+                    a3: 'Trabajo con precios basados en proyectos en lugar de tarifas por hora. El precio depende del alcance\u00A0y la complejidad. Estoy feliz de proporcionar una cotización personalizada después de un breve resumen.',
+                    q4: '¿Trabajas con clientes internacionales?',
+                    a4: 'Sí, trabajo remotamente con clientes de todo el mundo.',
+                    q5: '¿Qué herramientas usas?',
+                    a5: 'Figma, Adobe Illustrator, InDesign, Photoshop\u00A0y herramientas asistidas por IA para prototipado rápido\u00A0y experimentación visual.',
+                    q6: '¿Cómo puedo empezar a trabajar contigo?',
+                    a6: 'Envíame un mensaje con una breve descripción del proyecto, cronograma\u00A0y rango de presupuesto — te responderé en 24 horas.'
                 },
                 contact: {
                     title: 'Trabajemos juntos',
                     description: 'Contáctame\u00A0para discutir tu proyecto. Estoy abierta\u00A0a nuevas ideas\u00A0y colaboraciones.',
                     getInTouch: 'Ponerse en Contacto'
                 },
-                footer: '© 2025 Varvara Shiryaeva — Diseñadora gráfica'
+                footer: '© 2026 Varvara Shiryaeva — Diseñadora gráfica'
             },
             ru: {
                 nav: {
@@ -2471,26 +3130,24 @@
                 faq: {
                     title: 'Часто задаваемые вопросы',
                     q1: 'Какие услуги вы предлагаете?',
-                    a1: 'Я создаю продуманные визуальные системы — от брендинга\u00A0и редакционного дизайна до UI/UX\u00A0и интерактивных веб-решений. Также интегрирую инструменты AI в рабочий процесс для ускорения генерации идей\u00A0и прототипирования.',
+                    a1: 'Hi! Here\'s a quick overview of some that I offer:\n\n• Website development and design\n• Content generation using Ai\n• Design of advertising materials and social media posts\n• Branding and corporate Identity\n• Prototyping and app interface design\n• Print design\n\nIf you have a specific project or need something tailored to your unique vision, feel free to reach out and we can discuss how I can help!',
                     q2: 'Какой у вас процесс дизайна?',
-                    a2: 'Мой процесс обычно включает исследование, разработку концепции, визуальную эксплорацию, доработку\u00A0и финальную подачу. Я делюсь черновиками в процессе работы, чтобы обеспечить согласованность\u00A0и ясность.',
-                    q3: 'Сколько времени занимает проект?',
-                    a3: 'Небольшие проекты (постеры, макеты) — 3–7 дней\nПроекты брендинга или UI — 2–4 недели в зависимости от объёма',
-                    q4: 'Какие у вас расценки?',
-                    a4: 'Я работаю с проектным ценообразованием, а не почасовыми ставками. Цена зависит от объёма\u00A0и сложности. Буду рада предоставить индивидуальное предложение после краткого брифа.',
-                    q5: 'Работаете ли вы с международными клиентами?',
-                    a5: 'Да, я работаю удалённо с клиентами по всему миру.',
-                    q6: 'Какие инструменты вы используете?',
-                    a6: 'Figma, Adobe Illustrator, InDesign, Photoshop\u00A0и инструменты с поддержкой AI для быстрого прототипирования\u00A0и визуального экспериментирования.',
-                    q7: 'Как начать работу с вами?',
-                    a7: 'Отправьте мне сообщение с кратким описанием проекта, сроками\u00A0и бюджетным диапазоном — я отвечу в течение 24 часов.'
+                    a2: 'Мой рабочий процесс обычно включает в себя исследование, разработку концепции, визуальное оформление, доработку и окончательную сдачу. На каждом этапе я делюсь черновиками, чтобы обеспечить согласованность и ясность. Также всегда приветствую чёткие и конкретные правки.',
+                    q3: 'Какие у вас расценки?',
+                    a3: 'Я работаю с проектным ценообразованием, а не почасовыми ставками. Цена зависит от объёма\u00A0и сложности. Буду рада предоставить индивидуальное предложение после краткого брифа.',
+                    q4: 'Работаете ли вы с международными клиентами?',
+                    a4: 'Да, я работаю удалённо с клиентами по всему миру.',
+                    q5: 'Какие инструменты вы используете?',
+                    a5: 'Figma, Adobe Illustrator, InDesign, Photoshop\u00A0и инструменты с поддержкой AI для быстрого прототипирования\u00A0и визуального экспериментирования.',
+                    q6: 'Как начать работу с вами?',
+                    a6: 'Отправьте мне сообщение с кратким описанием проекта, сроками\u00A0и бюджетным диапазоном — я отвечу в течение 24 часов.'
                 },
                 contact: {
                     title: 'Давайте работать вместе',
                     description: 'Свяжитесь со\u00A0мной, чтобы обсудить ваш проект. Я открыта\u00A0для новых идей\u00A0и сотрудничества.',
                     getInTouch: 'Связаться'
                 },
-                footer: '© 2025 Варвара Ширяева — Графический дизайнер'
+                footer: '© 2026 Варвара Ширяева — Графический дизайнер'
             }
         };
 
@@ -2557,15 +3214,10 @@
             if (typingTimeout) clearTimeout(typingTimeout);
             typeText();
             
-            // Features nav
+            // Features nav (both navs: first container and secondary in second container)
             const navItems = document.querySelectorAll('.features-nav-item');
-            if (navItems.length >= 5) {
-                navItems[0].textContent = t.features.overview;
-                navItems[1].textContent = t.features.graphicDesign;
-                navItems[2].textContent = t.features.uiUx;
-                navItems[3].textContent = t.features.webDesign;
-                navItems[4].textContent = t.features.aiDesign;
-            }
+            const navLabels = [t.features.overview, t.features.graphicDesign, t.features.uiUx, t.features.webDesign, t.features.aiDesign];
+            navItems.forEach((el, i) => { el.textContent = navLabels[i % 5]; });
 
             // Feature cards
             const featureCards = document.querySelectorAll('.feature-card');
@@ -2611,7 +3263,7 @@
             
             const faqQuestions = document.querySelectorAll('.faq-question span');
             const faqAnswers = document.querySelectorAll('.faq-answer p');
-            if (faqQuestions.length >= 7 && faqAnswers.length >= 7) {
+            if (faqQuestions.length >= 6 && faqAnswers.length >= 6) {
                 faqQuestions[0].textContent = t.faq.q1;
                 faqAnswers[0].textContent = t.faq.a1;
                 faqQuestions[1].textContent = t.faq.q2;
@@ -2624,8 +3276,6 @@
                 faqAnswers[4].textContent = t.faq.a5;
                 faqQuestions[5].textContent = t.faq.q6;
                 faqAnswers[5].textContent = t.faq.a6;
-                faqQuestions[6].textContent = t.faq.q7;
-                faqAnswers[6].textContent = t.faq.a7;
             }
 
             // Contact
@@ -2655,6 +3305,7 @@
         // Project Modal Functions
         let currentVariant = 'a';
         let carouselInterval = null;
+        let activeBookKeyHandler = null;
 
         function openProjectModal(projectId) {
             const modal = document.getElementById('project-modal');
@@ -2662,16 +3313,215 @@
             
             // Project content data
             const projects = {
+                'restaurant-menu': {
+                    title: 'Restaurant menu',
+                    description: 'A4 restaurant menu pages with 3D page-flip navigation.',
+                    images: [
+                        'images/restaurant-menu-pages/page3.png',
+                        'images/restaurant-menu-pages/page1.png',
+                        'images/restaurant-menu-pages/page2.png',
+                        'images/restaurant-menu-pages/page5.png',
+                        'images/restaurant-menu-pages/page6.png',
+                        'images/restaurant-menu-pages/page7.png',
+                        'images/restaurant-menu-pages/page8.png',
+                        'images/restaurant-menu-pages/page9.png',
+                        'images/restaurant-menu-pages/page10.png',
+                        'images/restaurant-menu-pages/page4.png'
+                    ]
+                },
                 'ai-visuals': {
                     title: 'AI visuals',
-                    description: 'A collection of generative AI artwork showcasing the intersection of artificial intelligence and creative design. These visuals demonstrate the power of AI tools in creating unique, compelling imagery.',
-                    images: [
-                        'images/20250831_1143_Dynamic_Controller_Ad_gen_01k3zyye8mefmanj7epdcx9d3z 2.png',
-                        'images/20250904_2002_Cinematic_Finance_Design_gen_01k4b539x5eee9caefn43wbkvh 2.png',
-                        'images/20250910_0705_Dynamic_Racing_Minimalism_gen_01k4s72p3kestvafe6j379h6h1 2.png',
-                        'images/20250910_0808_Vibrant_Summer_Drinks_gen_01k4samxbsetj88aw6wjyn61me 2.png',
-                        'images/20250911_1801_Bold_Broccoli_Art_gen_01k4wyzpg6e68vwjxs49m5seq2 2.png',
-                        'images/20250919_1053_Modern_Dental_Website_Design_gen_01k5gsmhgsfrgtkx689myxm69e 2.png'
+                    description: 'A curated case study of generative visuals grouped by concepts, moods and art directions.',
+                    caseGroups: [
+                        {
+                            title: 'Series 2',
+                            images: [
+                                'images/ai-visuals-case/2/20250831_1143_Dynamic_Controller_Ad_gen_01k3zyye8mefmanj7epdcx9d3z.png',
+                                'images/ai-visuals-case/2/20250831_1146_Modern_Coffee_Ad_gen_01k3zz53ccfb1rrrghwta0sgk3.png',
+                                'images/ai-visuals-case/2/20250831_1148_Dynamic_Lime_Ad_gen_01k3zz874res0am5f8x656g0g8.png',
+                                'images/ai-visuals-case/2/20250831_1152_Dynamic_Finance_Advertisement_gen_01k3zzfv3geqsvp6t19jfz8w5a.png',
+                                'images/ai-visuals-case/2/20250831_1219_Modern_Autumn_Ad_gen_01k4011321epf9q3pcx2hshh5p.png',
+                                'images/ai-visuals-case/2/20250831_1229_Modern_Bank_Ad_gen_01k401m16me518sebvtw950z5k.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 3',
+                            images: [
+                                'images/ai-visuals-case/3/20250901_1005_Corporate_Strawberry_Ad_gen_01k42bsm0ve008sexx9na0m15v.png',
+                                'images/ai-visuals-case/3/20250901_1015_Cherry_Juice_Ad_gen_01k42cb1c2fn3v70q81pd391mw.png',
+                                'images/ai-visuals-case/3/20250901_1016_Sleek_Car_Ad_Design_gen_01k42cdx0yfbq8mqh6gxt7fnnm.png',
+                                'images/ai-visuals-case/3/20250901_1027_Modern_Fast_Food_Ad_gen_01k42d26xmfbaak1gf6dpagcc7.png',
+                                'images/ai-visuals-case/3/20250901_1035_Halloween_Ad_Composition_gen_01k42da7k7f909wrw419c4s1f0.png',
+                                'images/ai-visuals-case/3/20250901_1042_Corporate_Book_Ad_gen_01k42dwv3defztqkt1tz55tfyq.png',
+                                'images/ai-visuals-case/3/20250901_1045_Modern_Game_Advertisement_gen_01k42e1wj2fmvbxkmqgt0a10bd.png',
+                                'images/ai-visuals-case/3/20250901_1051_Modern_Coffee_Ad_gen_01k42eda1yf0ett2zxhrzrds1v.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 4',
+                            images: [
+                                'images/ai-visuals-case/4/20250906_2026_Playful_Teddy_Collage_gen_01k4gba78bemtbz9agdvv8fhk5.png',
+                                'images/ai-visuals-case/4/20250906_2034_Cherry_Collage_Ad_gen_01k4gbp4ate5btkgcssfz7ymsk.png',
+                                'images/ai-visuals-case/4/20250906_2036_Teddy_Bear_Ad_gen_01k4gbth7ye7abkpw418dc7nfj.png',
+                                'images/ai-visuals-case/4/20250906_2040_Modern_Birthday_Collage_gen_01k4gc0y5gf4g9sgv685f29fj0.png',
+                                'images/ai-visuals-case/4/20250906_2041_Finance_Collage_Ad_gen_01k4gc5023fkmvjkt9bh1vsta8.png',
+                                'images/ai-visuals-case/4/20250906_2044_Artistic_New_Year_Tree_gen_01k4gcaacmf7b9hcns5cz5avny.png',
+                                'images/ai-visuals-case/4/20250906_2049_Vibrant_Gaming_Collage_gen_01k4gcka1yfmsts6pgmkr9vn1w.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 5',
+                            images: [
+                                'images/ai-visuals-case/5/20250905_0759_Futuristic_Neon_Advertisement_gen_01k4ce42zbe4evr5xgt1jqkrn8.png',
+                                'images/ai-visuals-case/5/20250905_0800_Neon_Nightlife_Cocktails_gen_01k4ce7xqrer4arnwj6pf6je6r.png',
+                                'images/ai-visuals-case/5/20250906_2136_Neon_Ocean_Promotion_gen_01k4gfahr4eqcsh90b49pnhz26.png',
+                                'images/ai-visuals-case/5/20250906_2141_Neon_Ocean_Promotion_gen_01k4gfgdxcf92vaxe16tkj9shh.png',
+                                'images/ai-visuals-case/5/20250906_2145_Futuristic_Neon_Bakery_Ad_gen_01k4gfrpjgf6vr0g4z44de9bmv.png',
+                                'images/ai-visuals-case/5/20250906_2149_Neon_Pirate_Promotion_gen_01k4gg0ebefzvrgc32ksfecenx.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 6',
+                            images: [
+                                'images/ai-visuals-case/6/20250910_0631_Bold_3D_Realism_gen_01k4s531bkfya8fax9xz2z0q87.png',
+                                'images/ai-visuals-case/6/20250910_0631_Bold_3D_Realism_gen_01k4s531bme44bg11chn4j65kh.png',
+                                'images/ai-visuals-case/6/20250910_0633_Bold_Finance_Sculpture_gen_01k4s571wafd1s1c3fea64vm7f.png',
+                                'images/ai-visuals-case/6/20250910_0634_Futuristic_Woman_Design_gen_01k4s59esve9gsymznmw31w2bs.png',
+                                'images/ai-visuals-case/6/20250910_0637_Futuristic_Seminar_Display_gen_01k4s5ebtaf02rs71d9m5wgbmk.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 7',
+                            images: [
+                                'images/ai-visuals-case/7/20250911_1854_Dynamic_Racing_Car_Ad_gen_01k4x1yp34e3q96w1tbfcvbm24.png',
+                                'images/ai-visuals-case/7/20250911_1858_Dynamic_Chips_Ad_gen_01k4x27wvreqrvdpdn4fd5tr5y.png',
+                                'images/ai-visuals-case/7/20250911_1859_Dynamic_Dog_Ad_gen_01k4x29vhfft6ap4fkhhwr48xp.png',
+                                'images/ai-visuals-case/7/20250911_1906_Energetic_K_pop_Dance_gen_01k4x2na2eex8t3wkgsd1ajm1p.png',
+                                'images/ai-visuals-case/7/20250911_1913_Dynamic_Skateboarding_Ad_gen_01k4x32jd4ej79fg8cgt7agske.png',
+                                'images/ai-visuals-case/7/20250911_1914_Dynamic_Horse_Riding_Ad_gen_01k4x35vg2fe9sr0nrnw3v01jm.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 8',
+                            images: [
+                                'images/ai-visuals-case/8/20250906_1028_Futuristic_Game_Controller_Ad_gen_01k4f926cve8ha98b7jv5htrq2.png',
+                                'images/ai-visuals-case/8/20250906_1033_Pink_Teddy_Advertisement_gen_01k4f9c521e849yf7xt9rsmexs.png',
+                                'images/ai-visuals-case/8/20250906_1034_Premium_Ocean_Ad_gen_01k4f9ebtmf8j95qs27tvr2jzt.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 9',
+                            images: [
+                                'images/ai-visuals-case/9/20250904_1825__gen_01k4azj5sbedttyjcde37zk5ye.png',
+                                'images/ai-visuals-case/9/20250904_1904_Modern_Ocean_Ad_gen_01k4b1trv0e2crjfsn2nbst7n0.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 10',
+                            images: [
+                                'images/ai-visuals-case/10/20250919_1720_Modern_Japan_Presentation_gen_01k5hfrprbfsraf5kx72ryyh55.png',
+                                'images/ai-visuals-case/10/20250919_1722_Modern_Presentation_Design_gen_01k5hfwr7fe2d9r7w26mfpm9hq.png',
+                                'images/ai-visuals-case/10/20250919_1728_Tea_Types_Showcase_gen_01k5hg76h4fderpabdm2508xk7.png',
+                                'images/ai-visuals-case/10/20250919_1734_Modern_Italy_Presentation_gen_01k5hgjy3dfd6agcjyy69zh3fw.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 11',
+                            images: [
+                                'images/ai-visuals-case/11/20250911_1758_Stylish_Coffee_Composition_gen_01k4wyt9zcepysxn8kpp4zvkz3.png',
+                                'images/ai-visuals-case/11/20250911_1801_Bold_Broccoli_Art_gen_01k4wyzpg6e68vwjxs49m5seq2.png',
+                                'images/ai-visuals-case/11/20250911_1814_Bold_Musical_Aesthetic_gen_01k4wzqvcpfz4b59yk5yty3rza.png',
+                                'images/ai-visuals-case/11/20250911_1818_Modern_Cat_Realism_gen_01k4wzz1jnep481t1wvbh4c9ga.png',
+                                'images/ai-visuals-case/11/20250911_1824_Egg_Minimalism_gen_01k4x0a36pex1rn2nsd2nqn9x0.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 12',
+                            images: [
+                                'images/ai-visuals-case/12/20250910_0644_Bold_Cinematic_Beauty_gen_01k4s5ss72fy0bfm3ntm1h8chd.png',
+                                'images/ai-visuals-case/12/20250910_0645_Bold_Fashion_Statement_gen_01k4s5wxksffvtx9xng8gae0ky.png',
+                                'images/ai-visuals-case/12/20250910_0645_Dramatic_Book_Render_gen_01k4s5ye6mf08szxwdr9xngdrp.png',
+                                'images/ai-visuals-case/12/20250910_0646_Cinematic_Gaming_Controller_gen_01k4s600czf4p92dw1b9vx2433.png',
+                                'images/ai-visuals-case/12/20250910_0648_Cinematic_Muffin_Masterpiece_gen_01k4s63a74ej8bew405832eef7.png',
+                                'images/ai-visuals-case/12/20250910_0701_Dynamic_Headphone_Display_gen_01k4s6tss6f6prwd1h76ffbsy0.png',
+                                'images/ai-visuals-case/12/20250910_0705_Dynamic_Racing_Minimalism_gen_01k4s72p3kestvafe6j379h6h1.png',
+                                'images/ai-visuals-case/12/20250911_1827_Broccoli_Cinematic_Composition_gen_01k4x0f12wfvcb0ffrhw1zhfp5.png',
+                                'images/ai-visuals-case/12/20250911_1830_Cinematic_Egg_Encounter_gen_01k4x0mvvgfcevqv20y150takx.png',
+                                'images/ai-visuals-case/12/20250911_1841_Bold_Racing_Design_gen_01k4x175hsfrg9hn18vt55f06h.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 13',
+                            images: [
+                                'images/ai-visuals-case/13/20250910_0800_Bold_Racing_Motion_gen_01k4sa5xqdfj6vty9mgwmcr6kk.png',
+                                'images/ai-visuals-case/13/20250910_0801_Vibrant_Pizza_Delight_gen_01k4sa8znnezc8g9t5zbjh0rye.png',
+                                'images/ai-visuals-case/13/20250910_0808_Vibrant_Summer_Drinks_gen_01k4samxbsetj88aw6wjyn61me.png',
+                                'images/ai-visuals-case/13/20250910_0812_Vibrant_Black_Friday_gen_01k4sawy25ftstdp4sfxspjcbj.png',
+                                'images/ai-visuals-case/13/20250910_0816_Cosmic_Exploration_Party_gen_01k4sb3vjtej7b88ghc7fpz4ph.png'
+                            ]
+                        },
+                        {
+                            title: 'Series 14',
+                            images: [
+                                'images/ai-visuals-case/14/20250906_1003_Futuristic_Beach_Ad_gen_01k4f7mhwcf8wvgxy1hw169tdb.png',
+                                'images/ai-visuals-case/14/20250906_1004_Futuristic_Jungle_Ad_gen_01k4f7qcv0fjsbn5b8ehxsjzx6.png',
+                                'images/ai-visuals-case/14/20250906_1006_Futuristic_Basketball_Ad_gen_01k4f7tb7tez3b935t298c1chy.png',
+                                'images/ai-visuals-case/14/20250906_1007_Futuristic_Candy_Advertisement_gen_01k4f7xdvyfag80bfgne94yfwk.png'
+                            ]
+                        },
+                        {
+                            title: 'Dark',
+                            images: [
+                                'images/ai-visuals-case/Dark/20250904_1955_Samurai_Power_Unleashed_gen_01k4b4pws3f6xrh978850g2bbw.png',
+                                'images/ai-visuals-case/Dark/20250904_2002_Cinematic_Finance_Design_gen_01k4b539x5eee9caefn43wbkvh.png',
+                                'images/ai-visuals-case/Dark/20250904_2005_Modern_Minimalist_Ocean_gen_01k4b5a727fr58351598e3g8yd.png',
+                                'images/ai-visuals-case/Dark/20250904_2005_Modern_Minimalist_Ocean_gen_01k4b5a728f04a18332fg6vmr0.png',
+                                'images/ai-visuals-case/Dark/20250904_2013_Bold_Halloween_Design_gen_01k4b5r20aefgsqqw6t05kq25s.png'
+                            ]
+                        },
+                        {
+                            title: 'Dynamic',
+                            images: [
+                                'images/ai-visuals-case/Dynamic/20250904_1924_Dynamic_Ocean_Advertising_gen_01k4b2xmrpevpbdn51f9wfaxkr.png',
+                                'images/ai-visuals-case/Dynamic/20250904_1930_Dynamic_Candy_Ad_gen_01k4b397mje9kr8bqdfmnvdqvs.png',
+                                'images/ai-visuals-case/Dynamic/20250904_1930_Dynamic_Candy_Ad_gen_01k4b397mmf6va5e1p6yqbw2td.png',
+                                'images/ai-visuals-case/Dynamic/20250904_1933_Dynamic_Ocean_Promotion_gen_01k4b3cadhekyvypn0qqjkes8m.png',
+                                'images/ai-visuals-case/Dynamic/20250904_1937_Dynamic_Escargot_Ad_gen_01k4b3nvj6fc6s5rvcem961pq3.png',
+                                'images/ai-visuals-case/Dynamic/20250904_1945_Dynamic_Popcorn_Ad_gen_01k4b43b7mf3ja9wn25ysw4w59.png'
+                            ]
+                        },
+                        {
+                            title: 'In circle',
+                            images: [
+                                'images/ai-visuals-case/In circle/20250919_1214_Modern_Tea_Ceremony_Design_gen_01k5gy9qwffxntgtjr4hbxmd88.png',
+                                'images/ai-visuals-case/In circle/20250919_1218_Minimalist_Guitarist_Landing_gen_01k5gyejb8e4abmx2tajcq9ka1.png',
+                                'images/ai-visuals-case/In circle/20250919_1620_Modern_Tea_Ceremony_Design_gen_01k5hc9xdsfp9b8qbztjnazrxj.png',
+                                'images/ai-visuals-case/In circle/20250919_1629_Modern_DJ_Page_Design_gen_01k5hcwsz3f81r0bkjjzmpja1x.png',
+                                'images/ai-visuals-case/In circle/20250919_1632_Modern_Chef_Portal_gen_01k5hd1k4vea8bx0dfz3dxyfdw.png'
+                            ]
+                        },
+                        {
+                            title: 'Landing',
+                            images: [
+                                'images/ai-visuals-case/Landing/20250919_1049_Modern_Police_Landing_Page_gen_01k5gsdmb7f29ss4zwkqgm4zr3.png',
+                                'images/ai-visuals-case/Landing/20250919_1053_Modern_Dental_Website_Design_gen_01k5gsmhgsfrgtkx689myxm69e.png',
+                                'images/ai-visuals-case/Landing/20250919_1058_Modern_French_Bakery_Design_gen_01k5gswns4f0nrfsv854jbgxk5.png',
+                                'images/ai-visuals-case/Landing/20250919_1109_Minimal_Builder_Landing_Page_gen_01k5gth8w1e90845962yfv7dm6.png',
+                                'images/ai-visuals-case/Landing/20250919_1116_Modern_Beekeeper_Layout_gen_01k5gv0kxsekkry70yw4sba898.png',
+                                'images/ai-visuals-case/Landing/20250919_1124_Minimalistic_Racer_Design_gen_01k5gvdh41evaa698jcebzypqr.png',
+                                'images/ai-visuals-case/Landing/20250919_1146_Minimal_DJ_Page_Design_gen_01k5gwmxvqer29cgmwwfys6xdg.png'
+                            ]
+                        },
+                        {
+                            title: 'Rainy',
+                            images: [
+                                'images/ai-visuals-case/Rainy/20250830_2053_Poetic_Mechanical_Elegance_gen_01k3yc1v3becfbvm9abttgt7g2.png',
+                                'images/ai-visuals-case/Rainy/20250830_2054_Rain_Kissed_Lizard_gen_01k3yc4p9gfpmt1y6wsmq7vqv7.png',
+                                'images/ai-visuals-case/Rainy/20250830_2056_Dewy_Blueberry_Elegance_gen_01k3yc641dfense3av8434vd55.png',
+                                'images/ai-visuals-case/Rainy/20250830_2056_Racing_Dreamscape_gen_01k3yc8qdjfp8s6cseb1crdykb.png',
+                                'images/ai-visuals-case/Rainy/20250830_2058_Rainy_Holiday_Serenity_gen_01k3ycarzmf7rvrxftkpzpjne0.png'
+                            ]
+                        }
                     ]
                 }
             };
@@ -2682,7 +3532,11 @@
             // Build modal content - only variant A
             const variantSelector = ``;
 
-            const imagesHTML = buildGalleryHTML(project.images, 'a', project.description);
+            const imagesHTML = projectId === 'restaurant-menu'
+                ? buildBookHTML(project.images)
+                : projectId === 'ai-visuals'
+                    ? buildAiVisualsCaseHTML(project)
+                    : buildGalleryHTML(project.images, 'a', project.description);
 
             const showDescInHeader = !project.description || projectId !== 'ai-visuals';
             contentInner.innerHTML = `
@@ -2693,87 +3547,334 @@
                 ${imagesHTML}
             `;
 
+            if (projectId === 'restaurant-menu') {
+                requestAnimationFrame(initBookViewer);
+            }
+
+            if (projectId === 'ai-visuals') {
+                requestAnimationFrame(initAiCaseLightbox);
+            }
+
             // Show modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
+
+        function buildAiVisualsCaseHTML(project) {
+            const groups = Array.isArray(project.caseGroups) ? project.caseGroups : [];
+            const totalImages = groups.reduce((sum, g) => sum + (g.images ? g.images.length : 0), 0);
+
+            const sectionsHTML = groups.map(group => {
+                const items = (group.images || []).map(src => `
+                    <button class="ai-case-card" type="button" data-ai-lightbox-src="${src}" data-ai-lightbox-alt="${group.title} visual">
+                        <img src="${src}" alt="${group.title} visual" loading="lazy" decoding="async">
+                    </button>
+                `).join('');
+
+                return `
+                    <section class="ai-case-section">
+                        <h3 class="ai-case-section-title">${group.title}</h3>
+                        <div class="ai-case-grid">${items}</div>
+                    </section>
+                `;
+            }).join('');
+
+            return `
+                <div class="ai-case">
+                    <section class="ai-case-overview">
+                        <p class="ai-case-description">${project.description}</p>
+                        <div class="ai-case-meta">
+                            <div class="ai-case-meta-item"><div class="label">Format</div><div class="value">Portfolio Case</div></div>
+                            <div class="ai-case-meta-item"><div class="label">Collections</div><div class="value">${groups.length}</div></div>
+                            <div class="ai-case-meta-item"><div class="label">Total Visuals</div><div class="value">${totalImages}</div></div>
+                            <div class="ai-case-meta-item"><div class="label">Focus</div><div class="value">AI Art Direction</div></div>
+                        </div>
+                    </section>
+                    ${sectionsHTML}
+                    <div class="ai-lightbox" id="ai-lightbox">
+                        <div class="ai-lightbox-content">
+                            <button type="button" class="ai-lightbox-close" aria-label="Close image">
+                                <iconify-icon icon="lucide:x" style="font-size: 20px;"></iconify-icon>
+                            </button>
+                            <img class="ai-lightbox-image" src="" alt="">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initAiCaseLightbox() {
+            const modal = document.querySelector('.project-modal.active');
+            if (!modal) return;
+            const root = modal.querySelector('.ai-case');
+            if (!root) return;
+
+            const lightbox = root.querySelector('#ai-lightbox');
+            const lightboxImg = lightbox ? lightbox.querySelector('.ai-lightbox-image') : null;
+            const closeBtn = lightbox ? lightbox.querySelector('.ai-lightbox-close') : null;
+            if (!lightbox || !lightboxImg || !closeBtn) return;
+
+            const open = (src, alt) => {
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || 'AI Visual';
+                lightbox.classList.add('active');
+            };
+            const close = () => {
+                lightbox.classList.remove('active');
+                lightboxImg.src = '';
+            };
+
+            root.querySelectorAll('[data-ai-lightbox-src]').forEach(card => {
+                card.addEventListener('click', () => {
+                    open(card.getAttribute('data-ai-lightbox-src'), card.getAttribute('data-ai-lightbox-alt'));
+                });
+            });
+
+            closeBtn.addEventListener('click', close);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) close();
+            });
+        }
+
         function buildGalleryHTML(images, variant, dividerText) {
             const wrapper = document.createElement('div');
             wrapper.className = `modal-images-wrapper gallery-variant-a`;
-            
+
             const wallDiv = document.createElement('div');
             wallDiv.className = 'testimonial-wall-testimonials-ke54efzgd';
 
-            // Первый ряд - прокрутка влево
-            const rowLeft = document.createElement('div');
-            rowLeft.className = 'scroll-row-testimonials-ke54efzgd scroll-left-testimonials-ke54efzgd';
-            rowLeft.style.animationDuration = '50s';
+            function createRow(rowImages, rowId) {
+                const rowWrapper = document.createElement('div');
+                rowWrapper.className = 'scroll-row-wrapper-testimonials-ke54efzgd';
+                rowWrapper.dataset.rowId = rowId;
 
-            // Первый scroll-content для первого ряда
-            const contentLeft1 = document.createElement('div');
-            contentLeft1.className = 'scroll-content-testimonials-ke54efzgd';
-            images.forEach(img => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card-testimonials-ke54efzgd';
-                card.innerHTML = `<img src="${img}" alt="AI Visual">`;
-                contentLeft1.appendChild(card);
-            });
-            rowLeft.appendChild(contentLeft1);
+                const prevBtn = document.createElement('button');
+                prevBtn.type = 'button';
+                prevBtn.className = 'scroll-arrow-testimonials-ke54efzgd scroll-arrow-left-testimonials-ke54efzgd';
+                prevBtn.innerHTML = '&#8592;';
 
-            // Дублированный scroll-content для первого ряда
-            const contentLeft2 = document.createElement('div');
-            contentLeft2.className = 'scroll-content-testimonials-ke54efzgd';
-            images.forEach(img => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card-testimonials-ke54efzgd';
-                card.innerHTML = `<img src="${img}" alt="AI Visual">`;
-                contentLeft2.appendChild(card);
-            });
-            rowLeft.appendChild(contentLeft2);
+                const row = document.createElement('div');
+                row.className = 'scroll-row-testimonials-ke54efzgd';
+                row.dataset.rowId = rowId;
 
-            // Второй ряд - прокрутка вправо
-            const rowRight = document.createElement('div');
-            rowRight.className = 'scroll-row-testimonials-ke54efzgd scroll-right-testimonials-ke54efzgd';
-            rowRight.style.animationDuration = '50s';
+                const content = document.createElement('div');
+                content.className = 'scroll-content-testimonials-ke54efzgd';
+                rowImages.forEach(img => {
+                    const card = document.createElement('div');
+                    card.className = 'testimonial-card-testimonials-ke54efzgd';
+                    card.innerHTML = `<img src="${img}" alt="AI Visual">`;
+                    content.appendChild(card);
+                });
+                row.appendChild(content);
 
-            // Первый scroll-content для второго ряда (обратный порядок)
-            const contentRight1 = document.createElement('div');
-            contentRight1.className = 'scroll-content-testimonials-ke54efzgd';
-            [...images].reverse().forEach(img => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card-testimonials-ke54efzgd';
-                card.innerHTML = `<img src="${img}" alt="AI Visual">`;
-                contentRight1.appendChild(card);
-            });
-            rowRight.appendChild(contentRight1);
+                const nextBtn = document.createElement('button');
+                nextBtn.type = 'button';
+                nextBtn.className = 'scroll-arrow-testimonials-ke54efzgd scroll-arrow-right-testimonials-ke54efzgd';
+                nextBtn.innerHTML = '&#8594;';
 
-            // Дублированный scroll-content для второго ряда
-            const contentRight2 = document.createElement('div');
-            contentRight2.className = 'scroll-content-testimonials-ke54efzgd';
-            [...images].reverse().forEach(img => {
-                const card = document.createElement('div');
-                card.className = 'testimonial-card-testimonials-ke54efzgd';
-                card.innerHTML = `<img src="${img}" alt="AI Visual">`;
-                contentRight2.appendChild(card);
-            });
-            rowRight.appendChild(contentRight2);
+                rowWrapper.appendChild(prevBtn);
+                rowWrapper.appendChild(row);
+                rowWrapper.appendChild(nextBtn);
 
-            wallDiv.appendChild(rowLeft);
+                return rowWrapper;
+            }
+
+            // Верхний ряд
+            wallDiv.appendChild(createRow(images, 'top'));
+
+            // Текстовый разделитель (если есть)
             if (dividerText) {
                 const divider = document.createElement('div');
                 divider.className = 'gallery-divider';
                 divider.textContent = dividerText;
                 wallDiv.appendChild(divider);
             }
-            wallDiv.appendChild(rowRight);
+
+            // Нижний ряд (обратный порядок для разнообразия)
+            wallDiv.appendChild(createRow([...images].reverse(), 'bottom'));
+
             wrapper.appendChild(wallDiv);
-            
+
             return wrapper.outerHTML;
         }
 
         function switchGalleryVariant(variant, projectId) {
             // Function kept for compatibility but not used anymore
+        }
+
+        function buildBookHTML(pageImages) {
+            const sourceImages = Array.isArray(pageImages) && pageImages.length
+                ? pageImages
+                : ['images/restaurant-menu-pages/page1.png', 'images/restaurant-menu-pages/page2.png'];
+            const safeImages = sourceImages.length === 1 ? [sourceImages[0], sourceImages[0]] : sourceImages;
+            const imgTag = (src, alt) => `
+                <img src="${src}" alt="${alt}" class="book-page-image" loading="lazy" decoding="async"
+                    onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<div class=&quot;book-page-missing&quot;>Image not found<br>${alt}</div>');">
+            `;
+            const spreads = [];
+            const frontCover = safeImages[0];
+            const backCover = safeImages[safeImages.length - 1];
+            const middlePages = safeImages.slice(1, -1);
+
+            // Opening cover (single page)
+            spreads.push({ type: 'single', image: frontCover, role: 'cover-open' });
+
+            // Inner pages grouped by two
+            for (let i = 0; i < middlePages.length; i += 2) {
+                spreads.push({
+                    type: 'pair',
+                    left: middlePages[i],
+                    right: middlePages[i + 1] || middlePages[i]
+                });
+            }
+
+            // Closing cover (single page)
+            if (safeImages.length > 1) {
+                spreads.push({ type: 'single', image: backCover, role: 'cover-close' });
+            }
+
+            const safeSpreadCount = spreads.length;
+            const spreadsHTML = spreads.map((spread, i) => {
+                const stateClass = i === 0 ? ' active' : i === 1 ? ' next' : '';
+                const typeClass = spread.type === 'pair' ? ' book-spread--pair' : ' book-spread--single';
+                return `
+                    <div class="book-spread${stateClass}${typeClass}" data-book-spread="${i}">
+                        ${spread.type === 'pair' ? `
+                            <div class="book-page">
+                                ${imgTag(spread.left, 'Restaurant menu left page')}
+                            </div>
+                            <div class="book-page">
+                                ${imgTag(spread.right, 'Restaurant menu right page')}
+                            </div>
+                        ` : `
+                            <div class="book-page book-page--single book-cover">
+                                ${imgTag(spread.image, spread.role === 'cover-close' ? 'Restaurant menu closing cover' : 'Restaurant menu cover')}
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="book-viewer book-viewer--menu" data-book-current="0" data-book-total="${safeSpreadCount}">
+                    <div class="book-controls">
+                        <button type="button" class="book-arrow book-prev" aria-label="Previous page">&#8592;</button>
+                        <div class="book-page-counter"><span class="book-current">1</span> / <span class="book-total">${safeSpreadCount}</span></div>
+                        <button type="button" class="book-arrow book-next" aria-label="Next spread">&#8594;</button>
+                    </div>
+                    <div class="book-stage">
+                        <div class="book">
+                            ${spreadsHTML}
+                        </div>
+                    </div>
+                    <div class="book-contact-sheet">
+                        ${safeImages.map((src, idx) => `
+                            <div class="book-contact-sheet-item">
+                                <img src="${src}" alt="Menu sheet ${idx + 1}" loading="lazy" decoding="async">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function initBookViewer() {
+            const root = document.querySelector('.project-modal.active .book-viewer');
+            if (!root) return;
+
+            const spreads = Array.from(root.querySelectorAll('.book-spread'));
+            const prevBtn = root.querySelector('.book-prev');
+            const nextBtn = root.querySelector('.book-next');
+            const currentEl = root.querySelector('.book-current');
+            const totalEl = root.querySelector('.book-total');
+            const total = spreads.length;
+            let current = 0;
+
+            function render(direction = null) {
+                spreads.forEach((spread, index) => {
+                    spread.classList.remove('active', 'prev', 'next', 'turn-next', 'turn-prev');
+                    if (index === current) spread.classList.add('active');
+                });
+
+                if (direction) {
+                    const active = spreads[current];
+                    if (active) {
+                        active.classList.add(direction === 'next' ? 'turn-next' : 'turn-prev');
+                    }
+                }
+
+                if (currentEl) currentEl.textContent = String(current + 1);
+                if (totalEl) totalEl.textContent = String(total);
+                if (prevBtn) prevBtn.disabled = current === 0;
+                if (nextBtn) nextBtn.disabled = current === total - 1;
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (current > 0) {
+                        current -= 1;
+                        render('prev');
+                    }
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (current < total - 1) {
+                        current += 1;
+                        render('next');
+                    }
+                });
+            }
+
+            if (activeBookKeyHandler) {
+                document.removeEventListener('keydown', activeBookKeyHandler);
+            }
+
+            activeBookKeyHandler = (e) => {
+                if (!document.querySelector('.project-modal.active')) return;
+                if (e.key === 'ArrowLeft' && current > 0) {
+                    current -= 1;
+                    render('prev');
+                } else if (e.key === 'ArrowRight' && current < total - 1) {
+                    current += 1;
+                    render('next');
+                }
+            };
+            document.addEventListener('keydown', activeBookKeyHandler);
+
+            render();
+        }
+
+        function initAiVisualsGalleryControls() {
+            const activeModal = document.querySelector('.project-modal.active') || document.querySelector('.project-modal');
+            if (!activeModal) return;
+
+            const galleryWrapper = activeModal.querySelector('.modal-images-wrapper.gallery-variant-a');
+            if (!galleryWrapper) return;
+
+            const rowWrappers = galleryWrapper.querySelectorAll('.scroll-row-wrapper-testimonials-ke54efzgd');
+            rowWrappers.forEach(wrapper => {
+                const row = wrapper.querySelector('.scroll-row-testimonials-ke54efzgd');
+                const prevBtn = wrapper.querySelector('.scroll-arrow-left-testimonials-ke54efzgd');
+                const nextBtn = wrapper.querySelector('.scroll-arrow-right-testimonials-ke54efzgd');
+
+                if (!row || !prevBtn || !nextBtn) return;
+
+                const getScrollAmount = () => {
+                    const width = row.clientWidth || 0;
+                    return width > 0 ? width * 0.6 : 200;
+                };
+
+                prevBtn.addEventListener('click', () => {
+                    row.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    row.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                });
+            });
         }
 
         function initCarousel() {
@@ -2826,11 +3927,28 @@
                 clearInterval(carouselInterval);
                 carouselInterval = null;
             }
+
+            if (activeBookKeyHandler) {
+                document.removeEventListener('keydown', activeBookKeyHandler);
+                activeBookKeyHandler = null;
+            }
+
+            const aiLightbox = document.getElementById('ai-lightbox');
+            if (aiLightbox) {
+                aiLightbox.classList.remove('active');
+            }
         }
 
         // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                const aiLightbox = document.getElementById('ai-lightbox');
+                if (aiLightbox && aiLightbox.classList.contains('active')) {
+                    aiLightbox.classList.remove('active');
+                    const img = aiLightbox.querySelector('.ai-lightbox-image');
+                    if (img) img.src = '';
+                    return;
+                }
                 closeProjectModal();
             }
         });
@@ -3428,11 +4546,12 @@
             if (!container) return;
 
             const colorOptions = ['#B9EBC4', '#A8D5C3', '#C2E8D1', '#E3F7DF', '#D9F4E0', '#C8E9D9', '#EAF9EB', '#D0F0E0', '#F0F9EE', '#D4F7EC'];
-            const toolNames = ['Figma', 'Adobe CC', 'Midjourney', 'GPT', 'Sora', 'HTML/CSS', 'Canvas', 'Claude', 'Cursor', 'vibe-coding'];
+            const toolNames = ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign', 'Midjourney', 'LLMs (ChatGPT, Claude)', 'Sora', 'Cursor', 'Vibe-coding', 'Tilda'];
 
             let width = 0, height = 0;
             const SCALE = 80;
-            const gravity = 5;
+            const SEPARATION = 0.06;
+            const gravity = 14;
             const bounce = 0.6;
             const friction = 0.98;
             let balls = [];
@@ -3458,8 +4577,8 @@
             }
 
             function initBalls() {
-                // Шары в 2 раза больше: было 0.08, стало 0.16; макс в пикселях 100
-                const rPx = Math.min(100, Math.min(width, height) * 0.16);
+                const minDim = Math.min(width, height);
+                const rPx = Math.max(minDim / 11, Math.min(165, minDim * 0.20));
                 const r = rPx / SCALE;
                 const worldW = width / SCALE;
                 const worldH = height / SCALE;
@@ -3477,24 +4596,34 @@
                         color: colorOptions[i % colorOptions.length]
                     };
                 });
+                for (let pass = 0; pass < 15; pass++) {
+                    for (let i = 0; i < balls.length; i++) {
+                        for (let j = i + 1; j < balls.length; j++) {
+                            resolveOverlapOnly(balls[i], balls[j]);
+                        }
+                        clampToBounds(balls[i]);
+                    }
+                }
             }
 
             function clampToBounds(ball) {
                 const r = ball.radius;
                 const worldW = width / SCALE;
                 const worldH = height / SCALE;
-                ball.x = Math.max(r, Math.min(worldW - r, ball.x));
-                ball.y = Math.max(r, Math.min(worldH - r, ball.y));
+                const inset = 0.04;
+                ball.x = Math.max(r + inset, Math.min(worldW - r - inset, ball.x));
+                ball.y = Math.max(r + inset, Math.min(worldH - r - inset, ball.y));
             }
 
             function wallBounce(ball) {
                 const r = ball.radius;
                 const worldW = width / SCALE;
                 const worldH = height / SCALE;
-                if (ball.x - r < 0) { ball.x = r; ball.vx = Math.abs(ball.vx) * bounce; }
-                if (ball.x + r > worldW) { ball.x = worldW - r; ball.vx = -Math.abs(ball.vx) * bounce; }
-                if (ball.y - r < 0) { ball.y = r; ball.vy = Math.abs(ball.vy) * bounce; }
-                if (ball.y + r > worldH) { ball.y = worldH - r; ball.vy = -Math.abs(ball.vy) * bounce; }
+                const inset = 0.04;
+                if (ball.x - r < inset) { ball.x = r + inset; ball.vx = Math.abs(ball.vx) * bounce; }
+                if (ball.x + r > worldW - inset) { ball.x = worldW - r - inset; ball.vx = -Math.abs(ball.vx) * bounce; }
+                if (ball.y - r < inset) { ball.y = r + inset; ball.vy = Math.abs(ball.vy) * bounce; }
+                if (ball.y + r > worldH - inset) { ball.y = worldH - r - inset; ball.vy = -Math.abs(ball.vy) * bounce; }
                 clampToBounds(ball);
             }
 
@@ -3502,7 +4631,7 @@
                 const dx = b.x - a.x;
                 const dy = b.y - a.y;
                 const distSq = dx * dx + dy * dy;
-                const minDist = a.radius + b.radius;
+                const minDist = a.radius + b.radius + SEPARATION;
                 const minDistSq = minDist * minDist;
                 if (distSq >= minDistSq || distSq < 1e-10) return;
                 const dist = Math.sqrt(distSq);
@@ -3529,7 +4658,7 @@
                 const dx = b.x - a.x;
                 const dy = b.y - a.y;
                 const distSq = dx * dx + dy * dy;
-                const minDist = a.radius + b.radius;
+                const minDist = a.radius + b.radius + SEPARATION;
                 const minDistSq = minDist * minDist;
                 if (distSq >= minDistSq || distSq < 1e-10) return;
                 const dist = Math.sqrt(distSq);
@@ -3544,27 +4673,40 @@
             }
 
             function step() {
-                const dt = 1 / 60;
+                const dt = 1 / 120;
                 const worldW = width / SCALE;
                 const worldH = height / SCALE;
 
-                balls.forEach(ball => {
-                    if (ball === draggedBall) return;
-                    ball.vy += gravity * dt;
-                    ball.x += ball.vx * dt;
-                    ball.y += ball.vy * dt;
-                    ball.vx *= friction;
-                    ball.vy *= friction;
-                    wallBounce(ball);
-                });
+                for (let sub = 0; sub < 2; sub++) {
+                    balls.forEach(ball => {
+                        if (ball === draggedBall) return;
+                        ball.vy += gravity * dt;
+                        ball.x += ball.vx * dt;
+                        ball.y += ball.vy * dt;
+                        ball.vx *= friction;
+                        ball.vy *= friction;
+                        wallBounce(ball);
+                    });
 
-                // Несколько проходов разрешения столкновений — убирает пересечения и лаги
-                for (let pass = 0; pass < 8; pass++) {
+                    for (let pass = 0; pass < 16; pass++) {
+                        for (let i = 0; i < balls.length; i++) {
+                            for (let j = i + 1; j < balls.length; j++) {
+                                resolveCollision(balls[i], balls[j]);
+                            }
+                            if (balls[i] !== draggedBall) clampToBounds(balls[i]);
+                        }
+                    }
+                }
+
+                balls.forEach(ball => {
+                    clampToBounds(ball);
+                });
+                for (let pass = 0; pass < 4; pass++) {
                     for (let i = 0; i < balls.length; i++) {
                         for (let j = i + 1; j < balls.length; j++) {
-                            resolveCollision(balls[i], balls[j]);
+                            resolveOverlapOnly(balls[i], balls[j]);
                         }
-                        if (balls[i] !== draggedBall) clampToBounds(balls[i]);
+                        clampToBounds(balls[i]);
                     }
                 }
             }
@@ -3578,18 +4720,37 @@
                     const r = ball.radius * SCALE;
                     ctx.beginPath();
                     ctx.arc(px, py, r, 0, Math.PI * 2);
-                    ctx.globalAlpha = 0.55;
-                    ctx.fillStyle = ball.color;
+                    ctx.closePath();
+                    const gradient = ctx.createRadialGradient(px - r * 0.3, py - r * 0.3, 0, px, py, r);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.12)');
+                    gradient.addColorStop(0.6, 'rgba(255, 255, 255, 0.06)');
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.03)');
+                    ctx.fillStyle = gradient;
                     ctx.fill();
-                    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
-                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                    ctx.lineWidth = 2.5;
                     ctx.stroke();
-                    ctx.globalAlpha = 1;
-                    ctx.fillStyle = '#0f172a';
-                    ctx.font = 'bold ' + Math.max(10, Math.min(14, r * 0.35)) + 'px Inter, sans-serif';
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                    const fontSize = Math.max(10, Math.min(14, r * 0.38));
+                    ctx.font = 'bold ' + fontSize + 'px Inter, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(ball.label, px, py);
+                    const lineGap = fontSize * 1.6;
+                    if (ball.label.includes('\n')) {
+                        const lines = ball.label.split('\n');
+                        const offset = (lines.length - 1) * (lineGap / 2);
+                        lines.forEach((line, i) => {
+                            ctx.fillText(line, px, py - offset + i * lineGap);
+                        });
+                    } else if (ball.label.includes(' (')) {
+                        const parts = ball.label.split(/ \((.+)\)/).filter(Boolean);
+                        const line1 = parts[0];
+                        const line2 = parts[1] ? '(' + parts[1] + ')' : '';
+                        ctx.fillText(line1, px, py - (line2 ? lineGap / 2 : 0));
+                        if (line2) ctx.fillText(line2, px, py + lineGap / 2);
+                    } else {
+                        ctx.fillText(ball.label, px, py);
+                    }
                 });
             }
 
@@ -3639,8 +4800,7 @@
                 draggedBall.x = x + dragOffsetX;
                 draggedBall.y = y + dragOffsetY;
                 clampToBounds(draggedBall);
-                // Сразу разводим перекрытия при перетаскивании — чтобы не лагало и не накладывались
-                for (let pass = 0; pass < 8; pass++) {
+                for (let pass = 0; pass < 20; pass++) {
                     for (const other of balls) {
                         if (other === draggedBall) continue;
                         resolveOverlapOnly(draggedBall, other);
@@ -3651,9 +4811,7 @@
                         }
                     }
                     clampToBounds(draggedBall);
-                    for (const other of balls) {
-                        if (other !== draggedBall) clampToBounds(other);
-                    }
+                    balls.forEach(b => clampToBounds(b));
                 }
                 e.preventDefault();
             }
