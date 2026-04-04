@@ -4832,8 +4832,8 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;');
             const base = 'images/calanmor-outdoor/';
-            const src360 = 'videos/calanmor-kiosk-360.mov';
-            const srcDayNight = 'videos/calanmor-day-night.mov';
+            const src360 = 'videos/calanmor-kiosk-360.mp4';
+            const srcDayNight = 'videos/calanmor-day-night.mp4';
             /* Референс: верхний ряд — день (левый / фронт / правый), нижний — ночь в тех же ракурсах */
             const photos = [
                 { file: 'outdoor-04.png', alt: 'Calanmor outdoor advertising display — daytime, angled view' },
@@ -4850,13 +4850,13 @@
             const video360 = `
                 <div class="menu-modal-outdoor-gallery-video" role="group" aria-label="${escAttr(kioskLabel)}">
                     <video class="menu-modal-video-el menu-modal-video-el--loop" autoplay muted playsinline loop preload="auto" disablepictureinpicture title="${escAttr(kioskLabel)}" aria-label="${escAttr(kioskLabel)}">
-                        <source src="${src360}" type="video/quicktime">
+                        <source src="${src360}" type="video/mp4">
                     </video>
                 </div>`;
             const videoDayNight = `
                 <div class="menu-modal-outdoor-gallery-video" role="group" aria-label="${escAttr(dayNightLabel)}">
                     <video class="menu-modal-video-el menu-modal-video-el--loop" autoplay muted playsinline loop preload="auto" disablepictureinpicture title="${escAttr(dayNightLabel)}" aria-label="${escAttr(dayNightLabel)}">
-                        <source src="${srcDayNight}" type="video/quicktime">
+                        <source src="${srcDayNight}" type="video/mp4">
                     </video>
                 </div>`;
             const leadHtml = leadText
