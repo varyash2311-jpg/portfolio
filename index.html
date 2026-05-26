@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сказки народов СССР — виртуальная выставка</title>
+    <meta name="description" content="Виртуальная выставка иллюстраций к сказкам народов СССР. Интерактивная карта, шесть тематических залов, оцифрованные книги и оживление иллюстраций.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Ponomar&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf5f3;
+            --bg-bottom: #f0e6e4;
+            --ink: #1a1410;
+            --muted: #5c5348;
+            --accent: #c62828;
+            --accent-dark: #8e1a1a;
+            --accent-hover: #a91f1f;
+            --accent-soft: rgba(198, 40, 40, 0.1);
+            --cream: #faf6ef;
+            --shadow: 0 18px 50px rgba(26, 20, 16, 0.12);
+            --radius: 12px;
+            --font-heading: 'PT Serif', Georgia, serif;
+            --font-body: 'PT Sans', system-ui, sans-serif;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            color: var(--ink);
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-bottom) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3,
+        .map-title,
+        .hall-title,
+        .tale-group-title,
+        .modal-info h2,
+        .book-modal h2,
+        .site-footer strong,
+        .exhibit-hover-tale {
+            font-family: var(--font-heading);
+        }
+
+        /* ── Header ── */
+        .site-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0.75rem 1.5rem;
+            background: rgba(250, 245, 243, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(26, 20, 16, 0.08);
+            transition: transform var(--transition);
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .nav-links button {
+            font: inherit;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.75rem;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .nav-links button:hover,
+        .nav-links button.active {
+            color: var(--accent);
+            border-color: rgba(198, 40, 40, 0.35);
+            background: var(--accent-soft);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            grid-template-rows: auto auto auto auto auto;
+            column-gap: 2rem;
+            row-gap: 0.5rem;
+            align-items: start;
+            padding: 6rem 4vw 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-text,
+        .map-wrap {
+            display: contents;
+        }
+        .hero-overline {
+            grid-column: 1;
+            grid-row: 1;
+            align-self: start;
+        }
+        .hero h1 {
+            grid-column: 1;
+            grid-row: 2;
+            align-self: start;
+            max-width: 34rem;
+        }
+        .hero-copy {
+            grid-column: 1;
+            grid-row: 3 / 5;
+            max-width: 36rem;
+            align-self: start;
+        }
+        .scroll-hint {
+            grid-column: 1;
+            grid-row: 5;
+        }
+        .map-column {
+            grid-column: 2;
+            grid-row: 2 / 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.35rem;
+            align-self: stretch;
+            min-height: 0;
+        }
+        .map-title {
+            width: 100%;
+            text-align: center;
+            margin: -0.2rem 0 0.85rem;
+        }
+        .map-hint {
+            max-width: 28rem;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+        .map-stage {
+            width: 100%;
+            max-width: 780px;
+            margin: 0;
+        }
+        .hero-overline,
+        .map-hint {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+        .hero-overline {
+            margin: 0;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.08;
+            margin: 0;
+        }
+        .hero-copy {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--muted);
+        }
+        .hero-lead,
+        .hero-body {
+            margin: 0 0 1rem;
+        }
+        .hero-body:last-child {
+            margin-bottom: 0;
+        }
+        .scroll-hint {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .scroll-hint span {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        /* ── Map ── */
+        .map-wrap {
+            position: relative;
+            z-index: 1;
+        }
+        .map-title {
+            font-size: clamp(1.4rem, 2.8vw, 1.75rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--ink);
+        }
+        .map-stage {
+            position: relative;
+            max-width: 780px;
+            margin: 0 auto;
+            line-height: 0;
+        }
+        .ussr-map-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            filter: drop-shadow(0 8px 24px rgba(26, 20, 16, 0.1));
+        }
+        .map-region {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .map-plaque {
+            position: absolute;
+            left: 50%;
+            bottom: 10%;
+            z-index: 5;
+            max-width: min(88%, 340px);
+            padding: 1rem 1.2rem 1.1rem;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: var(--radius);
+            box-shadow: 0 12px 40px rgba(26, 20, 16, 0.14);
+            border-left: 4px solid var(--accent);
+            transform: translateX(-50%) translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+        }
+        .map-plaque.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .map-plaque-title {
+            font-family: 'Ponomar', serif;
+            font-size: clamp(1.35rem, 3vw, 1.75rem);
+            line-height: 1.2;
+            color: var(--accent);
+            margin: 0 0 0.45rem;
+        }
+        .map-plaque-text {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: var(--muted);
+        }
+        /* ── Halls ── */
+        .hall {
+            scroll-margin-top: 4rem;
+            padding: 5rem 4vw;
+            position: relative;
+        }
+        .hall-inner { max-width: 1280px; margin: 0 auto; }
+        .hall-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(26,20,16,0.08);
+        }
+        .hall-number {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        .hall-ornament-strip {
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .hall-ornament-tile {
+            flex: 0 0 auto;
+            width: 170px;
+        }
+        .hall-ornament-tile img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .hall-ornament-tile--flip img {
+            transform: scaleX(-1);
+        }
+        .hall--russia .hall-title {
+            font-family: 'Ponomar', serif;
+            font-weight: 400;
+            font-size: clamp(2.25rem, 4.5vw, 3.35rem);
+            letter-spacing: 0.03em;
+            line-height: 1.15;
+            color: var(--accent);
+        }
+        .hall-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0.25rem 0 0.5rem;
+            font-weight: 700;
+        }
+        .hall-desc {
+            max-width: 36rem;
+            color: var(--muted);
+            margin: 0;
+        }
+        .hall-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .btn {
+            font: inherit;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            padding: 0.65rem 1.25rem;
+            border-radius: 999px;
+            border: 1px solid rgba(26,20,16,0.2);
+            background: rgba(255,255,255,0.6);
+            color: var(--ink);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .btn:hover { background: #fff; box-shadow: 0 4px 16px rgba(26,20,16,0.08); }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--cream);
+            border-color: var(--accent);
+        }
+        .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+        .btn:disabled,
+        .btn-primary:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Regional themes */
+        .hall--russia {
+            --hall-accent: var(--accent);
+        }
+        .hall--volga {
+            --hall-accent: var(--accent);
+        }
+        .hall--caucasus {
+            --hall-accent: var(--accent);
+        }
+        .hall--central-asia {
+            --hall-accent: var(--accent);
+        }
+        .hall--west {
+            --hall-accent: var(--accent);
+        }
+        .hall--baltic {
+            --hall-accent: var(--accent);
+        }
+        .hall[class*="hall--"] {
+            background: transparent;
+        }
+        .hall-number { color: var(--hall-accent); }
+        .hall-title::after {
+            content: '';
+            display: block;
+            width: 4rem;
+            height: 3px;
+            background: var(--hall-accent);
+            margin-top: 0.75rem;
+        }
+
+        /* Tale groups */
+        .tale-group { margin-bottom: 3.5rem; position: relative; z-index: 1; }
+        .tale-group-title {
+            font-size: 1.65rem;
+            margin: 0 0 0.35rem;
+            color: var(--hall-accent, var(--ink));
+        }
+        .tale-group-sub {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin: 0 0 1.5rem;
+        }
+        .exhibits {
+            --exhibit-gap: 6px;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: flex-end;
+            justify-content: center;
+            gap: var(--exhibit-gap);
+            width: fit-content;
+            max-width: calc(100% - 0.5rem);
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .exhibit {
+            flex: 0 1 auto;
+            min-width: 0;
+            background: transparent;
+            border-radius: var(--radius);
+            overflow: visible;
+            border: none;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .exhibit:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        .exhibit-img-wrap {
+            display: block;
+            position: relative;
+            line-height: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .exhibit-img-wrap img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: calc((min(1180px, 100vw - 3rem) - 4 * var(--exhibit-gap)) / 5);
+            max-height: clamp(140px, 22vw, 240px);
+            object-fit: contain;
+            border-radius: var(--radius);
+            vertical-align: bottom;
+            transition: transform 0.6s ease;
+        }
+        .exhibit:hover .exhibit-img-wrap img { transform: scale(1.03); }
+        .exhibit-hover-caption {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(26, 20, 16, 0.82) 0%, rgba(26, 20, 16, 0.35) 55%, transparent 100%);
+            color: #fff;
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+        .exhibit:hover .exhibit-hover-caption,
+        .exhibit:focus-visible .exhibit-hover-caption {
+            opacity: 1;
+        }
+        .exhibit-hover-tale {
+            font-size: 1rem;
+            line-height: 1.3;
+            margin: 0 0 0.35rem;
+        }
+        .exhibit-hover-artist {
+            font-size: 0.78rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* ── Modals ── */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(18, 14, 10, 0.88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition), visibility var(--transition);
+        }
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: var(--cream);
+            border-radius: calc(var(--radius) + 4px);
+            max-width: 960px;
+            width: 100%;
+            max-height: 92vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            transform: scale(0.96) translateY(12px);
+            transition: transform var(--transition);
+        }
+        .overlay.open .modal { transform: scale(1) translateY(0); }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            font: inherit;
+            font-size: 0.82rem;
+            padding: 0.45rem 0.85rem;
+            cursor: pointer;
+            line-height: 1.2;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+        #artClose.modal-close {
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-image-pane {
+            position: relative;
+            background: #1a1410;
+            overflow: hidden;
+            min-height: 320px;
+        }
+        .modal-image-pane img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+        }
+        .modal-image-pane.ai-alive img {
+            animation: breathe 4s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.03); filter: brightness(1.08) saturate(1.15); }
+        }
+        .zoom-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.35rem;
+            background: rgba(255,255,255,0.92);
+            padding: 0.35rem;
+            border-radius: 999px;
+        }
+        .zoom-controls button {
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.65rem;
+            white-space: nowrap;
+        }
+        .zoom-controls button:hover { background: rgba(26,20,16,0.08); }
+        .modal-info {
+            padding: 2rem 1.75rem;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-info h2 {
+            font-size: 1.75rem;
+            margin: 0 0 0.5rem;
+            line-height: 1.2;
+        }
+        .modal-meta {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 1.25rem;
+        }
+        .modal-comment {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .btn-ai {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: #fff;
+            border: none;
+        }
+        .btn-ai:hover { filter: brightness(1.08); }
+        .btn-ai.active {
+            background: linear-gradient(135deg, #6d1515, var(--accent-dark));
+        }
+        .ai-status {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 0.75rem;
+            min-height: 1.2em;
+        }
+
+        /* Book reader */
+        .book-modal {
+            max-width: 780px;
+            grid-template-columns: 1fr;
+            position: relative;
+        }
+        .book-modal .book-header {
+            padding: 1.5rem 1.75rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .book-modal h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .book-viewer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 380px;
+        }
+        .book-page {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 320px;
+        }
+        .book-page--left {
+            background: #fff;
+            border-right: 1px solid rgba(26,20,16,0.1);
+        }
+        .book-page--right {
+            background: #faf6ef;
+            align-items: center;
+        }
+        .book-page--right img {
+            max-width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(26,20,16,0.12);
+        }
+        .book-text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--ink);
+        }
+        .book-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.75rem 1.5rem;
+            border-top: 1px solid rgba(26,20,16,0.08);
+        }
+        .page-indicator {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: var(--accent-dark);
+            color: rgba(255,255,255,0.75);
+            font-size: 0.85rem;
+        }
+        .site-footer strong {
+            display: block;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                grid-template-rows: none;
+                row-gap: 0;
+                padding-top: 5rem;
+                min-height: auto;
+            }
+            .hero-text,
+            .map-wrap {
+                display: block;
+            }
+            .hero-overline,
+            .hero h1,
+            .hero-copy,
+            .scroll-hint,
+            .map-column {
+                grid-column: auto;
+                grid-row: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.35rem;
+                margin-top: 2rem;
+            }
+            .map-title,
+            .map-hint,
+            .map-stage {
+                max-width: none;
+            }
+            .map-stage {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .modal {
+                grid-template-columns: 1fr;
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+            .modal-image-pane { min-height: 240px; max-height: 45vh; }
+            .book-viewer { grid-template-columns: 1fr; }
+            .book-page--left { border-right: none; border-bottom: 1px solid rgba(26,20,16,0.1); }
+            .site-header {
+                justify-content: center;
+                padding: 0.5rem 0.75rem;
+            }
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.35rem;
+                width: 100%;
+            }
+            .nav-links button {
+                font-size: 0.65rem;
+                padding: 0.35rem 0.5rem;
+                letter-spacing: 0.04em;
+            }
+            .exhibits {
+                --exhibit-gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                max-width: calc(100vw - 1.5rem);
+            }
+            .exhibit-img-wrap img {
+                max-width: calc((100vw - 1.5rem - var(--exhibit-gap)) / 2);
+                max-height: min(48vw, 240px);
+            }
+        }
+        @media (max-width: 900px) and (min-width: 520px) {
+            .exhibit-img-wrap img {
+                max-width: calc((100vw - 1.5rem - 2 * var(--exhibit-gap)) / 3);
+                max-height: min(40vw, 260px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+    <nav class="nav-links" id="navLinks" aria-label="Разделы выставки"></nav>
+</header>
+
+<main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-text">
+            <p class="hero-overline">Виртуальная выставка</p>
+            <h1 id="hero-title">Сказки народов СССР</h1>
+            <div class="hero-copy">
+                <p class="hero-lead">
+                    Визуальное путешествие по географическим регионам СССР: на выставке собраны
+                    иллюстрации к народным и авторским сказкам, созданные в XX веке для детских книг.
+                    Через рисунок художники показывают, каким кажется сказочный мир — с его костюмами,
+                    орнаментом, архитектурой, пейзажем и бытом разных народов.
+                </p>
+                <p class="hero-body">
+                    Советская детская книга стремилась быть одновременно познавательной и красивой:
+                    издательства приглашали графиков и живописцев, которые искали национальный характер
+                    в линии, цвете и композиции. Сказка становилась уроком бережного отношения к культуре
+                    соседних республик — от северных лесов до степей и гор.
+                </p>
+                <p class="hero-body">
+                    На главной странице — интерактивная карта шести регионов. Выберите территорию,
+                    чтобы перейти в тематический зал: здесь иллюстрации сгруппированы по сюжетам,
+                    а при клике на работу открывается увеличенный просмотр с именем художника и пояснением.
+                    В русском зале можно пролистать оцифрованную книгу и посмотреть демонстрацию «оживления»
+                    картинки — как задумка будущей цифровой функции выставки.
+                </p>
+            </div>
+            <p class="scroll-hint"><span>↓</span> Начните с карты или выберите зал в меню</p>
+        </div>
+
+        <div class="map-wrap">
+            <div class="map-column">
+            <p class="map-title">Интерактивная карта</p>
+            <p class="map-hint" id="mapHint">Выберите регион, чтобы отправиться в путешествие по сказочному миру</p>
+            <div class="map-stage">
+                <img
+                    class="ussr-map-img"
+                    src="images/ussr-exhibition/ussr-map.png"
+                    width="1024"
+                    height="686"
+                    alt="Карта Союза ССР по союзным республикам">
+                <button type="button" class="map-region" data-region="russia" style="left:18%;top:8%;width:64%;height:80%;" aria-label="Русские сказки"></button>
+                <button type="button" class="map-region" data-region="central-asia" style="left:46%;top:48%;width:42%;height:40%;" aria-label="Средняя Азия"></button>
+                <button type="button" class="map-region" data-region="volga" style="left:36%;top:38%;width:24%;height:22%;" aria-label="Поволжье"></button>
+                <button type="button" class="map-region" data-region="caucasus" style="left:28%;top:54%;width:22%;height:16%;" aria-label="Кавказ"></button>
+                <button type="button" class="map-region" data-region="west" style="left:6%;top:24%;width:20%;height:28%;" aria-label="Западная СССР"></button>
+                <button type="button" class="map-region" data-region="baltic" style="left:1%;top:6%;width:14%;height:22%;" aria-label="Прибалтика"></button>
+                <div class="map-plaque" id="mapPlaque" aria-hidden="true">
+                    <p class="map-plaque-title" id="mapPlaqueTitle">Русские сказки</p>
+                    <p class="map-plaque-text" id="mapPlaqueText"></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="hallsContainer"></div>
+</main>
+
+<footer class="site-footer">
+    <strong>Сказки народов СССР</strong>
+    Виртуальная выставка иллюстраций к фольклору народов Советского Союза.<br>
+    Нажмите на экспонат для детального осмотра · Оживите картинку с помощью ИИ · Пролистайте оцифрованную книгу
+</footer>
+
+<!-- Artwork modal -->
+<div class="overlay" id="artOverlay" role="dialog" aria-modal="true" aria-labelledby="artTitle">
+    <div class="modal" style="position:relative">
+        <button type="button" class="modal-close" id="artClose" aria-label="Закрыть">&times;</button>
+        <div class="modal-image-pane" id="artImagePane">
+            <img id="artImage" src="" alt="">
+            <div class="zoom-controls">
+                <button type="button" id="zoomOut">Уменьшить</button>
+                <button type="button" id="zoomReset">Сброс</button>
+                <button type="button" id="zoomIn">Увеличить</button>
+            </div>
+        </div>
+        <div class="modal-info">
+            <h2 id="artTitle"></h2>
+            <p class="modal-meta" id="artMeta"></p>
+            <p class="modal-comment" id="artComment"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-ai" id="btnAnimate">Оживить иллюстрацию</button>
+                <button type="button" class="btn" id="btnOpenBook">Читать сказку</button>
+            </div>
+            <p class="ai-status" id="aiStatus"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Book modal -->
+<div class="overlay" id="bookOverlay" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="modal book-modal" style="position:relative">
+        <button type="button" class="modal-close" id="bookClose">Закрыть</button>
+        <div class="book-header">
+            <h2 id="bookTitle"></h2>
+        </div>
+        <div class="book-viewer">
+            <div class="book-page book-page--left">
+                <p class="book-text" id="bookText"></p>
+            </div>
+            <div class="book-page book-page--right">
+                <img id="bookIllustration" src="" alt="">
+            </div>
+        </div>
+        <div class="book-nav">
+            <button type="button" class="btn" id="bookPrev">Назад</button>
+            <span class="page-indicator" id="bookPageIndicator"></span>
+            <button type="button" class="btn" id="bookNext">Вперёд</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    const PLACEHOLDER = (hue, label) =>
+        `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+            <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="hsl(${hue},35%,78%)"/>
+                <stop offset="100%" stop-color="hsl(${hue},45%,58%)"/>
+            </linearGradient></defs>
+            <rect fill="url(#g)" width="400" height="500"/>
+            <rect x="30" y="30" width="340" height="440" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <text x="200" y="240" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="'PT Serif', Georgia, serif" font-size="18">${label}</text>
+            <text x="200" y="270" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="'PT Sans', sans-serif" font-size="11">иллюстрация · демо</text>
+        </svg>`)}`;
+
+    const REGIONS = {
+        russia: {
+            id: 'russia',
+            nav: 'Русские сказки',
+            title: 'Русские сказки',
+            hallClass: 'hall--russia',
+            ornament: 'images/ussr-exhibition/russian-ornament.png',
+            desc: 'Иллюстрации к пушкинским сказкам: «Сказка о царе Салтане», «Сказка о золотом петушке» и другие. Художники интерпретируют сюжеты в традициях русской книжной миниатюры и акварели.',
+            mapTitle: 'Русские сказки',
+            mapText: 'Пушкинские сказки в иллюстрациях советских и до революционных художников — от палехской миниатюры до акварельной книжной графики.',
+            book: {
+                title: 'Сказка о царе Салтане',
+                pages: [
+                    { text: 'Три девицы под окном пряли когда-то поздно вечером. Говорила одна девица: «Как было бы хорошо, если б у меня был царь Салтан в женихах!»', img: 'images/ussr-exhibition/tsar-saltan-1.png' },
+                    { text: 'Царь Салтан, выйдя на крыльцо, увидел на море белый лебедь. Лебедь подплыл к крыльцу — и превратился в прекрасного юношу.', img: PLACEHOLDER(5, 'Лебедь-принц') },
+                    { text: 'А царь Салтан с царицей и с Гвидоном живут да поживают, и нет им ни гвоздя, ни сурма, кроме разве ссоры да злой молвы.', img: PLACEHOLDER(10, 'Счастливый конец') }
+                ]
+            },
+            tales: [
+                {
+                    title: 'Сказки Пушкина',
+                    items: [
+                        {
+                            tale: 'Сказка о царе Салтане, о сыне его славном и могучем богатыре князе Гвидоне Салтановиче и о прекрасной царевне Лебеди',
+                            artist: 'К. Кузнецов',
+                            year: 1946,
+                            img: 'images/ussr-exhibition/tsar-saltan-1.png',
+                            comment: 'Акварель 1946 года: зимняя сцена у окна, в которой царь Салтан подслушивает разговор сестёр — начало сказки.'
+                        },
+                        {
+                            tale: 'Сказка о золотом петушке',
+                            artist: 'И. П. Вакуров',
+                            year: 1937,
+                            img: 'images/ussr-exhibition/golden-cockerel-1.png',
+                            comment: 'Офсетная печать 1937 года. Иллюстрация передаёт эпический размах сказки — сражение, крепости и декоративная композиция в традиции советской книжной графики.'
+                        },
+                        {
+                            tale: 'Сказка о мёртвой царевне и о семи богатырях',
+                            artist: 'Б. А. Дехтерёв',
+                            year: 1949,
+                            img: 'images/ussr-exhibition/pushkin-dead-princess.png',
+                            comment: 'Иллюстрация к сборнику «Сказки» А. С. Пушкина (1949): царица у волшебного зеркала, контраст узорчатого интерьера и пейзажа за аркой.'
+                        },
+                        {
+                            tale: 'Сказка о царе Салтане',
+                            artist: 'И. Я. Билибин',
+                            year: 1937,
+                            img: 'images/ussr-exhibition/pushkin-golden-cockerel-bilibin.png',
+                            comment: 'Иллюстрация 1937 года к сборнику «Сказки» А. С. Пушкина (издание 1949). Характерная билибинская манера: орнамент, зимний пейзаж и выразительный жест царя.'
+                        },
+                        {
+                            tale: 'Сказка о золотом петушке',
+                            artist: 'В. М. Конашевич',
+                            year: '',
+                            img: 'images/ussr-exhibition/pushkin-golden-cockerel-konashevich.png',
+                            comment: 'Иллюстрация к книге А. С. Пушкина «Сказка о золотом петушке». Царь Дадон в башне указывает на золотого петушка на шпиле — характерная для Конашевича манера: чёткий контур, народный колорит и панорама города. Выставка «Известный и неизвестный», 30 августа — 1 октября 2018, Государственный Русский музей, ул. Инженерная, 4.'
+                        }
+                    ]
+                }
+            ]
+        },
+        volga: {
+            id: 'volga',
+            nav: 'Поволжье',
+            mapTitle: 'Поволжье',
+            mapText: 'Многонациональный регион у Волги: татарский, башкирский, чувашский, марийский, мордовский и удмуртский фольклор.'
+        },
+        caucasus: {
+            id: 'caucasus',
+            nav: 'Кавказ',
+            mapTitle: 'Кавказ',
+            mapText: 'Горные сказки грузинских, армянских, азербайджанских и других народов Кавказа.'
+        },
+        'central-asia': {
+            id: 'central-asia',
+            nav: 'Средняя Азия',
+            mapTitle: 'Центральная Азия',
+            mapText: 'Фольклор узбекских, казахских, киргизских, таджикских и туркменских народов.'
+        },
+        west: {
+            id: 'west',
+            nav: 'Запад СССР',
+            mapTitle: 'Западная СССР',
+            mapText: 'Сказки украинских, белорусских и молдавских народов.'
+        },
+        baltic: {
+            id: 'baltic',
+            nav: 'Прибалтика',
+            mapTitle: 'Прибалтика',
+            mapText: 'Фольклор латвийских, литовских и эстонских народов.'
+        }
+    };
+
+    const regionOrder = ['russia', 'volga', 'caucasus', 'central-asia', 'west', 'baltic'];
+    let currentArt = null;
+    let currentBook = null;
+    let bookPageIndex = 0;
+    let zoomLevel = 1;
+
+    // Build nav & halls
+    const navLinks = document.getElementById('navLinks');
+    const hallsContainer = document.getElementById('hallsContainer');
+
+    regionOrder.forEach(key => {
+        const r = REGIONS[key];
+        const btn = document.createElement('button');
+        btn.textContent = r.nav;
+        btn.dataset.target = key;
+        btn.addEventListener('click', () => scrollToHall(key));
+        navLinks.appendChild(btn);
+
+        if (!r.tales) return;
+
+        const hall = document.createElement('section');
+        hall.className = `hall ${r.hallClass}`;
+        hall.id = `hall-${key}`;
+        hall.innerHTML = `
+            <div class="hall-inner">
+                ${r.ornament ? renderOrnamentStrip(r.ornament) : ''}
+                <header class="hall-header">
+                    <div>
+                        <h2 class="hall-title">${r.title}</h2>
+                        <p class="hall-desc">${r.desc}</p>
+                    </div>
+                    <div class="hall-actions">
+                        <button type="button" class="btn btn-primary" data-book="${key}" disabled aria-disabled="true">Зайти в библиотеку</button>
+                        <a href="#top" class="btn">Вернуться к карте</a>
+                    </div>
+                </header>
+                <div class="hall-tales">${renderTales(r)}</div>
+            </div>`;
+        hallsContainer.appendChild(hall);
+    });
+
+    function renderOrnamentStrip(src) {
+        const tileWidth = 170;
+        const count = Math.max(16, Math.ceil((window.innerWidth || 1200) / tileWidth) + 2);
+        let tiles = '';
+        for (let i = 0; i < count; i++) {
+            const flip = i % 2 === 1 ? ' hall-ornament-tile--flip' : '';
+            tiles += `<span class="hall-ornament-tile${flip}"><img src="${src}" alt="" aria-hidden="true"></span>`;
+        }
+        return `<div class="hall-ornament-strip" role="presentation">${tiles}</div>`;
+    }
+
+    function renderTales(region) {
+        return region.tales.map(group => `
+            <article class="tale-group">
+                <h3 class="tale-group-title">${group.title}</h3>
+                ${group.sub ? `<p class="tale-group-sub">${group.sub}</p>` : ''}
+                <div class="exhibits">
+                    ${group.items.map((item, i) => `
+                        <figure class="exhibit" tabindex="0" role="button"
+                                data-region="${region.id}" data-tale="${group.title}" data-index="${i}"
+                                aria-label="Открыть: ${item.tale}, ${item.artist}">
+                            <div class="exhibit-img-wrap">
+                                <img src="${item.img}" alt="${item.tale} — ${item.artist}" loading="lazy">
+                                <div class="exhibit-hover-caption">
+                                    <p class="exhibit-hover-tale">${item.tale}</p>
+                                    <p class="exhibit-hover-artist">${item.artist}</p>
+                                </div>
+                            </div>
+                        </figure>
+                    `).join('')}
+                </div>
+            </article>
+        `).join('');
+    }
+
+    // Map interactions
+    const mapPlaque = document.getElementById('mapPlaque');
+    const mapPlaqueText = document.getElementById('mapPlaqueText');
+    const russiaRegion = REGIONS.russia;
+    mapPlaqueText.textContent = russiaRegion.mapText;
+
+    function showMapPlaque() {
+        mapPlaque.classList.add('visible');
+        mapPlaque.setAttribute('aria-hidden', 'false');
+    }
+    function hideMapPlaque() {
+        mapPlaque.classList.remove('visible');
+        mapPlaque.setAttribute('aria-hidden', 'true');
+    }
+
+    document.querySelectorAll('.map-region').forEach(el => {
+        const key = el.dataset.region;
+        const r = REGIONS[key];
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', r.mapTitle);
+
+        el.addEventListener('click', () => scrollToHall(key));
+        el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollToHall(key);
+            }
+        });
+
+        if (key === 'russia') {
+            el.addEventListener('mouseenter', showMapPlaque);
+            el.addEventListener('mouseleave', hideMapPlaque);
+            el.addEventListener('focus', showMapPlaque);
+            el.addEventListener('blur', hideMapPlaque);
+        }
+    });
+
+    function scrollToHall(key) {
+        const r = REGIONS[key];
+        if (!r.tales) return;
+        const el = document.getElementById(`hall-${key}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        updateActiveNav(key);
+    }
+
+    function updateActiveNav(key) {
+        navLinks.querySelectorAll('button').forEach(b => {
+            b.classList.toggle('active', b.dataset.target === key);
+        });
+    }
+
+    // Intersection observer for nav
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id.replace('hall-', '');
+                updateActiveNav(id);
+            }
+        });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    regionOrder.forEach(key => {
+        const el = document.getElementById(`hall-${key}`);
+        if (el) observer.observe(el);
+    });
+
+    // Exhibit clicks
+    hallsContainer.addEventListener('click', e => {
+        const ex = e.target.closest('.exhibit');
+        if (ex) openArt(ex.dataset.region, ex.dataset.tale, +ex.dataset.index);
+        const bookBtn = e.target.closest('[data-book]');
+        if (bookBtn) openBook(bookBtn.dataset.book);
+    });
+    hallsContainer.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && e.target.classList.contains('exhibit')) {
+            openArt(e.target.dataset.region, e.target.dataset.tale, +e.target.dataset.index);
+        }
+    });
+
+    function findItem(regionId, taleTitle, index) {
+        const region = REGIONS[regionId];
+        const group = region.tales.find(t => t.title === taleTitle);
+        return { region, item: group.items[index], group };
+    }
+
+    // Art modal
+    const artOverlay = document.getElementById('artOverlay');
+    const artImage = document.getElementById('artImage');
+    const artImagePane = document.getElementById('artImagePane');
+    const artTitle = document.getElementById('artTitle');
+    const artMeta = document.getElementById('artMeta');
+    const artComment = document.getElementById('artComment');
+    const btnAnimate = document.getElementById('btnAnimate');
+    const btnOpenBook = document.getElementById('btnOpenBook');
+    const aiStatus = document.getElementById('aiStatus');
+
+    function openArt(regionId, taleTitle, index) {
+        const { region, item } = findItem(regionId, taleTitle, index);
+        currentArt = { regionId, taleTitle, index, region, item };
+        zoomLevel = 1;
+        artImage.style.transform = 'scale(1)';
+        artImagePane.classList.remove('ai-alive');
+        btnAnimate.classList.remove('active');
+        btnAnimate.textContent = 'Оживить иллюстрацию';
+        aiStatus.textContent = '';
+
+        artImage.src = item.img;
+        artImage.alt = item.tale;
+        artTitle.textContent = item.tale;
+        artMeta.textContent = item.year ? `${item.artist} · ${item.year}` : item.artist;
+        artComment.textContent = item.comment;
+
+        artOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeArt() {
+        artOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        currentArt = null;
+    }
+
+    document.getElementById('artClose').addEventListener('click', closeArt);
+    artOverlay.addEventListener('click', e => { if (e.target === artOverlay) closeArt(); });
+
+    document.getElementById('zoomIn').addEventListener('click', () => {
+        zoomLevel = Math.min(zoomLevel + 0.25, 3);
+        artImage.style.transform = `scale(${zoomLevel})`;
+    });
+    document.getElementById('zoomOut').addEventListener('click', () => {
+        zoomLevel = Math.max(zoomLevel - 0.25, 0.5);
+        artImage.style.transform = `scale(${zoomLevel})`;
+    });
+    document.getElementById('zoomReset').addEventListener('click', () => {
+        zoomLevel = 1;
+        artImage.style.transform = 'scale(1)';
+    });
+
+    btnAnimate.addEventListener('click', () => {
+        if (!currentArt) return;
+        if (artImagePane.classList.contains('ai-alive')) {
+            artImagePane.classList.remove('ai-alive');
+            btnAnimate.classList.remove('active');
+            btnAnimate.textContent = 'Оживить иллюстрацию';
+            aiStatus.textContent = '';
+            return;
+        }
+        btnAnimate.textContent = 'Оживляем…';
+        btnAnimate.disabled = true;
+        aiStatus.textContent = 'Искусственный интеллект анализирует иллюстрацию…';
+        setTimeout(() => {
+            artImagePane.classList.add('ai-alive');
+            btnAnimate.classList.add('active');
+            btnAnimate.textContent = 'Остановить';
+            btnAnimate.disabled = false;
+            aiStatus.textContent = 'Демо-режим: лёгкая анимация дыхания и насыщенности. В полной версии здесь будет видео, сгенерированное ИИ.';
+        }, 1800);
+    });
+
+    btnOpenBook.addEventListener('click', () => {
+        if (currentArt) {
+            closeArt();
+            openBook(currentArt.regionId);
+        }
+    });
+
+    // Book modal
+    const bookOverlay = document.getElementById('bookOverlay');
+    const bookTitle = document.getElementById('bookTitle');
+    const bookText = document.getElementById('bookText');
+    const bookIllustration = document.getElementById('bookIllustration');
+    const bookPageIndicator = document.getElementById('bookPageIndicator');
+
+    function openBook(regionId) {
+        const region = REGIONS[regionId];
+        currentBook = region.book;
+        bookPageIndex = 0;
+        bookTitle.textContent = region.book.title;
+        renderBookPage();
+        bookOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function renderBookPage() {
+        const page = currentBook.pages[bookPageIndex];
+        bookText.textContent = page.text;
+        bookIllustration.src = page.img;
+        bookIllustration.alt = `Иллюстрация, стр. ${bookPageIndex + 1}`;
+        bookPageIndicator.textContent = `Страница ${bookPageIndex + 1} из ${currentBook.pages.length}`;
+    }
+
+    function closeBook() {
+        bookOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('bookClose').addEventListener('click', closeBook);
+    bookOverlay.addEventListener('click', e => { if (e.target === bookOverlay) closeBook(); });
+    document.getElementById('bookPrev').addEventListener('click', () => {
+        if (bookPageIndex > 0) { bookPageIndex--; renderBookPage(); }
+    });
+    document.getElementById('bookNext').addEventListener('click', () => {
+        if (bookPageIndex < currentBook.pages.length - 1) { bookPageIndex++; renderBookPage(); }
+    });
+
+    // Escape closes modals
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            closeArt();
+            closeBook();
+        }
+    });
+})();
+</script>
+</body>
+</html>
