@@ -5,9 +5,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:portfolio": "node scripts/build-portfolio-for-pages.mjs",
+    "build:exhibition": "node scripts/build-exhibition-for-pages.mjs",
+    "deploy:portfolio": "npm run build:portfolio && wrangler pages deploy dist-portfolio",
+    "deploy:exhibition": "npm run build:exhibition && wrangler pages deploy dist-exhibition --project-name=skazki-narodov-sssr --commit-dirty=true",
     "preview": "vite preview",
     "chrome:cdp": "echo 'Запустите Chrome в отдельном терминале:' && echo '  /Applications/Google\\\\ Chrome.app/Contents/MacOS/Google\\\\ Chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-cdp-profile' && echo 'Затем: npm run cdp:connect'",
-    "cdp:connect": "node scripts/connect-chrome-cdp.mjs"
+    "cdp:connect": "node scripts/connect-chrome-cdp.mjs",
+    "shortodella": "node scripts/shortodella.mjs",
+    "shortodella:auth": "node scripts/shortodella-auth.mjs",
+    "shortodella:energy": "node scripts/shortodella.mjs energy",
+    "shortodella:mockups": "node scripts/generate-shortodella-mockups.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.294.0",

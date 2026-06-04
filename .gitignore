@@ -3,6 +3,8 @@ node_modules/
 
 # Build
 dist/
+dist-portfolio/
+dist-exhibition/
 build/
 
 # Env and secrets
@@ -20,3 +22,9 @@ build/
 # Cache
 .cache/
 *.tsbuildinfo
+
+# Local tool venvs (agent)
+.venv-xlsx/
+
+# Chrome CDP debug profile (local)
+.chrome-cdp-profile/
